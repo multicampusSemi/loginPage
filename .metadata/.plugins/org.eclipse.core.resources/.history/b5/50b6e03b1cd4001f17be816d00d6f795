@@ -1,0 +1,30 @@
+package com.project.service;
+
+import java.util.List;
+
+import org.springframework.stereotype.Service;
+import com.project.mapper.LjmSemiMapper;
+import com.project.model.BookingList;
+
+@Service
+public class CartService {
+	private final LjmSemiMapper cartMapper;
+	
+	public CartService(LjmSemiMapper cartMapper) {
+        this.cartMapper = cartMapper;
+    }
+	public List<BookingList> showbookingitem(int userId){
+		return cartMapper.showbookingitem(userId);
+	}
+	
+	
+	 public void removeProductsFromCart(int userId, List<Integer> productIds) {
+		  if (productIds != null && !productIds.isEmpty()) {
+		        ljmSemiMapper.deleteProductsFromCart(userId, productIds);
+		    } else {
+		    	alert("상품을 선택해 주세요");
+		    }
+	    }
+
+	
+}

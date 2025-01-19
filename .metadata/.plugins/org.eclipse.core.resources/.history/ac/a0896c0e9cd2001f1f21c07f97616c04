@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./oreder.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script defer src="./order.js"></script>
+</head>
+
+
+<body>
+    <h2>Order</h2>
+    <div id="orderlist">
+
+    </div>
+    <br>
+    <div id="price"></div>
+    <div class='buy'><button type="submit" >결제하기</button></div>
+
+
+  
+</body>
+</html>

@@ -1,0 +1,13 @@
+package com.project.controller;
+
+import java.nio.file.Path;
+import java.nio.file.Paths;
+
+import org.springframework.web.bind.annotation.RequestMapping;
+
+@RequestMapping("/static/{booking.html}")
+public class Cart {
+	Path path = Paths.get("static/resources").resolve("booking.html");
+	
+	
+}

@@ -1,0 +1,171 @@
+header {
+  font-family:"Hahmlet", serif;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: #e9e9e9;
+  color: #000000;
+  height: 100px;
+  width: 100%;
+  padding: 20px 0;
+  text-align: center;
+}
+
+header nav ul {
+  font-family:"Hahmlet", serif;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+header nav ul li {
+  font-family:"Hahmlet", serif;
+  display: inline;
+  margin-right: 20px;
+}
+
+header nav ul li a {
+  font-family:"Hahmlet", serif;
+  color: #000000;
+  text-decoration: none;
+}
+
+body {
+  font-family:"Hahmlet", serif;
+  background-color: #e9e9e9;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.container {
+  font-family:"Hahmlet", serif;
+  font-size: 30px;
+  background-color: #fff;
+  width: 400px;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+h1 {
+  font-family:"Hahmlet", serif;
+  font-size: 24px;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.tabs {
+  font-family:"Hahmlet", serif;
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 20px;
+}
+
+.tab {
+  font-family:"Hahmlet", serif;
+  background: none;
+  border: none;
+  font-size: 16px;
+  padding: 10px;
+  cursor: pointer;
+  color: #666;
+  border-bottom: 2px solid transparent;
+}
+
+.tab.active {
+  font-family:"Hahmlet", serif;
+  color: #333;
+  border-bottom: 2px solid #333;
+}
+
+.form {
+  font-family:"Hahmlet", serif;
+  text-align: left;
+}
+
+.hidden {
+  font-family:"Hahmlet", serif;
+  display: none;
+}
+
+/* 휴대폰 번호 입력 스타일 */
+.phone-input {
+  font-family:"Hahmlet", serif;
+  display: flex;
+  gap: 5px;
+}
+
+.phone-input input {
+  font-family:"Hahmlet", serif;
+  width: 60px;
+  text-align: center;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 14px;
+}
+
+.input-group {
+  font-family:"Hahmlet", serif;
+  margin-bottom: 15px;
+  margin-right: 20px;
+}
+
+.input-group label {
+  font-family:"Hahmlet", serif;
+  width: 300px;
+  display: block;
+  margin-bottom: 10px;
+  font-size: 14px;
+  color: #333;
+}
+
+.input-group input {
+  font-family:"Hahmlet", serif;
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 14px;
+}
+
+.radio-group {
+  font-family:"Hahmlet", serif;
+  display: flex;
+  flex-direction: row;  /* 명시적으로 가로로 배치되도록 설정 */
+  justify-content: flex-start;
+  gap: 20px;  /* 라디오 버튼들 사이 간격 조절 */
+  align-items: center;
+}
+
+.radio-group input {
+  font-family:"Hahmlet", serif;
+  margin: 0;
+}
+
+.radio-group label {
+  font-family:"Hahmlet", serif;
+  margin: 0;
+}
+
+.submit-btn {
+  font-family:"Hahmlet", serif;
+  width: 100%;
+  padding: 10px;
+  background-color: #333;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.submit-btn:hover {
+  font-family:"Hahmlet", serif;
+  background-color: #555;
+}

@@ -1,0 +1,9 @@
+package com.project.controller;
+
+import org.springframework.web.bind.annotation.RequestMapping;
+
+@RequestMapping("/static/{booking.html}")
+public class Cart {
+	
+	
+}

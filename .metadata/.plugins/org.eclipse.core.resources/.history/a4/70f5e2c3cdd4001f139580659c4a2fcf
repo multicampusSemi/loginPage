@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.project.mapper.LjmSemiMapper">
+
+
+    <delete id="deleteProductsFromCart" parameterType="map">
+    DELETE FROM bookinglist
+    WHERE user_id = #{userId}
+    <if test="productIds != null and productIds.size() > 0">
+        AND product_id IN
+        <foreach item="productId" collection="productIds" open="(" separator="," close=")">
+            #{productId}
+        </foreach>
+    </if>
+	</delete>
+	
+	
+	<select id="getDefaultUserId" resultType="int">
+    SELECT id 
+    FROM users 
+    LIMIT 1;
+	</select>
+	
+	<insert id="insertOrder" parameterType="com.project.model.Orders">
+    INSERT INTO Orders (user_id, quantity, created_at, total_price, shipping_fee)
+    VALUES (#{userId}, #{quantity}, NOW(), #{totalAmount}, #{shippingFee});
+	</insert>
+	
+	<select id="getAllOrders" resultType="com.project.model.Orders">
+    SELECT o.user_id, o.quantity, o.created_at, o.total_price AS totalAmount, p.productName, p.productPrice, p.shippingfee
+    FROM OrderItem o
+    JOIN products p ON o.user_id = p.user_id
+	</select>
+
+	<select id="showbookingitem" resultMap="bookingListResultMap">
+    SELECT p.productPrice, p.shippingfee, p.productName, p.photo
+    FROM bookinglist b
+    JOIN products p ON b.product_id = p.productId
+    WHERE b.user_id = 1
+	</select>
+
+  	<resultMap id="bookingListResultMap" type="com.project.model.BookingList">
+        <result property="bookingId" column="booking_id"/>
+        <result property="productName" column="product_name"/>
+        <result property="productPrice" column="product_price"/>
+        <result property="productCount" column="product_count"/>
+        <result property="shippingFee" column="shipping_fee"/>
+         <result property="productId" column="product_id"/>
+        <result property="status" column="status"/>
+        <result property="userId" column="user_id"/>
+    </resultMap>
+   
+  
+</mapper> 

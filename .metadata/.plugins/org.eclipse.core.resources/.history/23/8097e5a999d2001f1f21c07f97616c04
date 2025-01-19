@@ -1,0 +1,22 @@
+package com.project.model;
+
+import java.time.LocalDateTime;
+
+public class Cart {
+	private Long id;
+	
+	private String product_name;
+	private String produect_description;
+	private double shipping_fee;
+	private double product_price;
+	private String product_image_url;
+	private LocalDateTime created_at;
+}
+
+	public Long getId() {
+		return id;
+	}
+	
+	public void setId(Long id) {
+		this.id = id;
+	}

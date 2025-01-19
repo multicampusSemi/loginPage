@@ -1,0 +1,11 @@
+package com.project.model;
+
+public class Orders {
+	private String productName;
+    private int quantity;
+    private int productPrice;
+    private int totalAmount;
+    private int shippingFee;
+    private int productId;
+    private int userId;
+}

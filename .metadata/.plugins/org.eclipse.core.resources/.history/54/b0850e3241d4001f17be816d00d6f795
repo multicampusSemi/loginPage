@@ -1,0 +1,10 @@
+package com.project.model;
+
+import lombok.Data;
+
+@Data
+public class Orders {
+    private int quantity;
+    private int productPrice;
+    private int totalAmount;
+}

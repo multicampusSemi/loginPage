@@ -1,0 +1,12 @@
+package com.project.model;
+
+import lombok.Data;
+
+@Data
+public class Orders {
+    private int quantity;
+    private int productPrice;
+    private int totalAmount;
+    product.setTotalAmount(totalAmount);  // 모델에 설정
+    orderMapper.insertOrder(userId, quantity, totalAmount);  // 매퍼 호출
+}

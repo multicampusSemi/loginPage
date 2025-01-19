@@ -1,0 +1,27 @@
+package com.project.controller;
+
+import java.nio.file.Path;
+import java.nio.file.Paths;
+
+import org.springframework.core.io.FileSystemResource;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import jakarta.annotation.Resource;
+
+
+public class Cart {
+	@RequestMapping("/static/{booking.html}")
+	public ResponseEntity<Resource> serveStatic(@PathVariable String booking){
+		Path path = Paths.get("static/resources").resolve("booking.html");
+		Resource resource = new FileSystemResource(path);
+		if(!resource.exists()) {
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+		}
+		return ResponseEntity.ok().body(resource);
+		
+	}
+	
+}

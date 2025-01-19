@@ -1,0 +1,9 @@
+package com.project.mapper;
+
+import java.util.List;
+
+import com.project.model.Products;
+
+public interface ProductsMapper {
+	 List<Products> getAllProducts();
+}

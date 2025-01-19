@@ -1,0 +1,20 @@
+package com.project.mapper;
+
+import java.util.List; 
+
+import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+
+import com.project.model.BookingList;
+import com.project.model.Products;
+
+@Mapper
+public interface LjmSemiMapper {
+	    List<Products> showproduct(@Param("productId") int productId);
+	    
+	    int checkProductExists(@Param("productId") int productId);
+	    int checkUserExists(@Param("userId") int userId);
+	    void addProductToCart(@Param("userId") int userId, @Param("productId") int productId);
+	    List<BookingList> getCartProducts(int userId);
+	    void deleteProductsFromCart(@Param("userId") int userId, @Param("productIds") List<Integer> productIds);
+}

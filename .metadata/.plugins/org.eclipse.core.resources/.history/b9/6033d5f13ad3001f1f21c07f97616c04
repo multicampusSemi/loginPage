@@ -1,0 +1,22 @@
+package com.project.service;
+
+import java.util.List;
+
+import org.springframework.stereotype.Service;
+
+import com.project.mapper.LjmSemiMapper;
+import com.project.mapper.ProductsMapper;
+import com.project.model.Products;
+
+@Service
+public class ProductsService {
+	private final ProductsMapper productMapper;
+
+    public ProductsService(ProductsMapper productMapper) {
+        this.productMapper = productMapper;
+    }
+
+    public List<Products> getAllProducts() {
+        return productMapper.getAllProducts();
+    }
+}

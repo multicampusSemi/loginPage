@@ -1,0 +1,23 @@
+package com.project.service;
+
+import java.util.List;
+
+import org.springframework.stereotype.Service;
+import com.project.mapper.LjmSemiMapper;
+import com.project.model.BookingList;
+
+@Service
+public class CartService {
+	private final LjmSemiMapper cartMapper;
+	
+	public CartService(LjmSemiMapper cartMapper) {
+        this.cartMapper = cartMapper;
+    }
+	
+	
+	 public void removeProductsFromCart(int userId, List<Integer> productIds) {
+	        cartMapper.deleteProductsFromCart(userId, productIds);
+	    }
+
+	
+}

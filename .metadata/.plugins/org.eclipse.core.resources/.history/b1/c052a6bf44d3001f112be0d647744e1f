@@ -1,0 +1,18 @@
+package com.project.mvc;
+
+import org.mybatis.spring.annotation.MapperScan;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+@SpringBootApplication
+@ComponentScan(basePackages = "com.project.mapper")
+public class SemiProjectApplication {
+
+	public static void main(String[] args) {
+		SpringApplication.run(SemiProjectApplication.class, args);
+	}
+
+}

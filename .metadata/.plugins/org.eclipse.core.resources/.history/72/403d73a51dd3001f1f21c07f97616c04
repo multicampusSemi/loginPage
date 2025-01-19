@@ -1,0 +1,41 @@
+package com.project.service;
+
+import java.util.List;
+
+import org.springframework.stereotype.Service;
+
+import com.project.mapper.LjmSemiMapper;
+import com.project.model.Cart;
+
+import lombok.RequiredArgsConstructor;
+
+@Service
+@RequiredArgsConstructor
+public class CartServiceImpl implements CartService{
+	private final LjmSemiMapper ljmsemiMapper;
+
+	@Override
+	public void addProductCart(int userId, int productId, int productCount) {
+		List<Cart> existingProducts = ljmsemiMapper.findProductInCart(userId, productId);
+		
+		if (!existingProducts.isEmpty()) {
+            Cart existingProduct = existingProducts.get(0);
+            int newCount = existingProduct.getProductCount() + productCount;
+            ljmsemiMapper.updateProductCount(userId, productId, newCount);
+        } else {
+            // 존재하지 않으면 새로운 상품을 장바구니에 추가
+            ljmsemiMapper.addProductToCart(userId, productId, productCount);
+        }
+	}
+	
+	public void updateProductCount(int userId, int productId, int newCount) {
+        bookingMapper.updateProductCount(userId, productId, newCount);
+    }
+	
+	
+
+	
+	
+	
+	
+}

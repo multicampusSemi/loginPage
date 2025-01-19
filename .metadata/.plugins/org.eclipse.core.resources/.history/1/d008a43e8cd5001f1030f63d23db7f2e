@@ -1,0 +1,56 @@
+package com.project.service;
+
+import java.util.List; 
+import java.util.Map;
+
+import org.springframework.stereotype.Service;
+
+import com.project.mapper.LjmSemiMapper;
+import com.project.model.OrderItem;
+
+import lombok.RequiredArgsConstructor;
+
+@Service
+@RequiredArgsConstructor
+public class OrderItemService {
+	private final LjmSemiMapper orderMapper;
+	
+	public void saveOrder(int userId, List<OrderItem> selectedProducts) {
+	    int totalPrice = 0;  // 전체 주문의 총 가격을 담을 변수
+	    String status = "Pending";  // 주문 상태
+
+	    // 선택된 각 제품에 대해 totalAmount를 계산하고 totalPrice를 합산
+	    for (OrderItem product : selectedProducts) {
+	        int quantity = product.getQuantity();
+	        int productPrice = product.getProductPrice();
+	        int totalAmount = productPrice * quantity;  // 제품의 총 금액 계산
+	        product.setTotalAmount(totalAmount);  // 제품 모델에 총 금액 설정
+	        totalPrice += totalAmount;  // 전체 총 금액에 추가
+
+	        // 각 제품에 대한 주문을 DB에 삽입
+	        int shippingFee = product.getshippingFee();  // 배송비
+	        int productId = product.getProductId();  // 제품 ID
+
+	        // 매퍼 호출, 각 제품을 하나씩 주문 테이블에 삽입
+	        orderMapper.insertOrder(userId, quantity, totalAmount, shippingFee, productId);
+	    }
+
+	    // 전체 주문의 총 가격과 상태를 Orders 테이블에 삽입하는 부분이 필요할 수 있습니다.
+	    // 예시로 Orders 테이블에 insertOrder() 메서드를 추가할 수 있습니다.
+	    orderMapper.insertOrderTotal(userId, totalPrice, status);
+	}
+	public List<OrderItem> getOrders() {
+        return orderMapper.getAllOrders();
+    }
+
+	    public int calculateTotalPrice(List<OrderItem> orders) {
+	        int totalPrice = 0;
+	        for (OrderItem order : orders) {
+	            totalPrice += order.getProductPrice() * order.getQuantity();
+	        }
+	        return totalPrice;
+	    }
+}
+
+
+

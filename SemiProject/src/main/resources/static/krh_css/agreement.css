@@ -1,0 +1,23 @@
+.agreement .am{
+    font-family:"Hahmlet", serif;
+    width:1500px;
+    justify-self: center;
+    margin-top:100px;
+    margin-bottom:100px;
+}
+
+.agreement .am header{
+    display:flex;
+    justify-content: center;
+    font-size: 30px;
+    color:rgb(60, 60, 95);
+}
+
+.agreement .am main{
+    margin-top:80px;
+    padding:50px;
+    background-color: rgba(177, 176, 176, 0.205);
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 4, 0, 0.5);
+    font-size: 18px;
+}

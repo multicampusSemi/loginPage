@@ -1,0 +1,20 @@
+package com.project.mvc.config;
+
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.web.servlet.ViewResolver;
+import org.springframework.web.servlet.view.InternalResourceViewResolver;
+import org.thymeleaf.spring6.view.ThymeleafViewResolver;
+
+@Configuration
+public class WebConfig {
+	
+	@Bean
+	public ViewResolver viewResolver() {
+		ThymeleafViewResolver resolver = new ThymeleafViewResolver();
+        resolver.setContentType("text/html; charset=UTF-8");
+        resolver.setOrder(1);
+        return resolver;
+    }	
+	
+}

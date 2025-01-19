@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/ljm_css/booking.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="/ljm_js/booking.js"></script>
+</head>
+<body>
+    <div class="booking">
+        <h2>Cart</h2>
+        <br/>
+        <table class="booking-table">
+                <tr>
+                    <th><input type="checkbox" id="all-check" onclick="allCheck()"/></th>
+                    <th>상품명</th>
+                    <th>상세설명</th>
+                    <th>배송비</th>
+                    <th>수량</th>
+                    <th>가격</th>
+                </tr>
+                    <tbody></tbody>
+                </table>
+                <div class="allprice" colspan="6">배송비 000 + 가격 0000 = 0000원</div>
+        <br/>
+        <br/>
+        <hr/>
+        <button class="orderbtn" id="order" type="submit" onclick="order()">주문하러가기</button>
+        <button class="orderbtn" id="delete" onclick="deleteSelected()">선택 삭제</button>
+    </div>
+
+
+</body>
+</html>

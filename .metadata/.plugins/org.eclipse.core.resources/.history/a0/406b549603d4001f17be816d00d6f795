@@ -1,0 +1,28 @@
+package com.project.model;
+
+import java.sql.Date;
+
+import lombok.Data;
+
+@Data
+public class BookingList {
+	  	private int bookingId;
+	    private int userId;
+	    private int productId;
+	    private Date productAdd;
+	    private int productCount;
+	    private String status;
+	    private String productName;
+	    private int productPrice;
+	    private int shippingFee;
+	    private String productDescription;
+	    
+	    public String getProductDescription() {
+	        return productDescription;
+	    }
+
+	    // productdescription 필드에 대한 setter 추가
+	    public void setProductdescription(String productdescription) {
+	        this.productDescription = productdescription;
+	    }
+}

@@ -1,0 +1,43 @@
+package com.project.service;
+
+import java.util.List; 
+import java.util.Map;
+
+import org.springframework.stereotype.Service;
+
+import com.project.mapper.LjmSemiMapper;
+import com.project.model.OrderItem;
+
+import lombok.RequiredArgsConstructor;
+
+@Service
+@RequiredArgsConstructor
+public class OrderItemService {
+	private final LjmSemiMapper orderMapper;
+	
+	public void saveOrder(List<OrderItem> selectedProducts, int orderId, int userId) {
+        for (OrderItem product : selectedProducts) {
+            orderMapper.insertOrder(orderId, product.getProductId(), product.getQuantity());
+        }
+    }
+	public List<OrderItem> getOrders() {
+        return orderMapper.getAllOrders();
+    }
+
+	    public int calculateTotalPrice(List<OrderItem> orders) {
+	        int totalPrice = 0;
+	        for (OrderItem order : orders) {
+	            totalPrice += order.getProductPrice() * order.getQuantity();
+	        }
+	        return totalPrice;
+	    }
+	    
+	    public int createOrderId() {
+	        // 실제로는 DB에서 새로운 주문 ID를 생성해야 합니다.
+	        // 예시로 단순히 1을 반환하거나, DB에서 새로 생성된 ID를 반환하도록 수정해야 합니다.
+	        return orderMapper.createOrderId();
+	    }
+}
+
+
+

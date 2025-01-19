@@ -1,0 +1,75 @@
+package com.project.model;
+
+import java.time.LocalDateTime;
+
+import lombok.Data;
+
+@Data
+public class Cart {
+	private Long id;
+	
+	private String productName;
+	private String productDescription;
+	private double shippingFee;
+	private double productPrice;
+	private String productimageUrl;
+	private LocalDateTime createdAt;
+
+	public Long getId() {
+		return id;
+	}
+	
+	public void setId(Long id) {
+		this.id = id;
+	}
+	
+	public String getProductName() {
+		return productName;
+	}
+	
+	public void setProductName(String productName) {
+		this.productName = productName;
+	}
+	
+	public String getProductDescription() {
+		return productDescription;
+	}
+	
+	public void setProductDescription(String productDescription) {
+		this.productDescription = productDescription;
+	}
+	
+	public double getShippingFee() {
+		return shippingFee;
+	}
+	
+	public void setShippingFee(double shippinFee) {
+		this.shippingFee = shippingFee;
+	}
+
+	public double getProductPrice() {
+		return productPrice;
+	}
+
+	public void setProductPrice(double productPrice) {
+		this.productPrice = productPrice;
+	}
+
+	public String getProductimageUrl() {
+		return productimageUrl;
+	}
+
+	public void setProductimageUrl(String productimageUrl) {
+		this.productimageUrl = productimageUrl;
+	}
+
+	public LocalDateTime getCreatedAt() {
+		return createdAt;
+	}
+
+	public void setCreatedAt(LocalDateTime createdAt) {
+		this.createdAt = createdAt;
+	}
+	
+	
+}

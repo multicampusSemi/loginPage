@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.project.mapper.krhProductMapper">
+	<!--리스트업-->
+	<select id="findAll" resultType="com.project.model.KrhProduct">
+		SELECT * FROM products ORDER BY createdAt DESC
+	</select>
+	
+	<!--검색-->
+	<select id="productPageSearch" parameterType="String" resultType="com.project.model.KrhProduct">
+		SELECT * 
+	    FROM products
+	    WHERE productName LIKE CONCAT('%', #{keyword}, '%')
+	    ORDER BY productId DESC;
+	</select>
+
+		<select id="getProductsByCategoryId" resultType="com.project.model.KrhProduct">
+		    SELECT p.*, c.category_name
+		    FROM products p
+		    JOIN categories c ON p.category_id = c.category_id
+		    WHERE p.category_id = #{categoryId}
+		</select>
+		
+		<select id="getAllCategories" resultType="com.project.model.krhCategory">
+		    SELECT * FROM categories;
+		</select>
+		
+		<select id="main" resultType="com.project.model.KrhProduct">
+			select productId, createdAt, productName,photo, productCode, productPrice, FORMAT(productPrice, 0) AS formatted_price from products order by createdAt asc limit 5
+		</select>
+		
+		<!-- 장바구니에 상품 추가 -->
+		<insert id="addToCart" parameterType="com.project.model.BookingList">
+		    INSERT INTO bookinglist(user_id, product_id, product_count)
+		    VALUES (#{userId}, #{productId}, #{productCount})
+		</insert>
+		
+		<!-- 장바구니에 이미 상품이 있는지 확인 -->
+		<select id="findByUserAndProduct" resultType="com.project.model.BookingList">
+		    SELECT * FROM bookinglist WHERE user_id = #{userId} AND product_id = #{productId}
+		</select>
+		
+		<!-- 장바구니에 있는 상품 수량 업데이트 -->
+		<update id="updateCart" parameterType="com.project.model.BookingList">
+		    UPDATE bookinglist 
+		    SET product_count = product_count + #{productCount}
+		    WHERE use_id = #{userId} AND productId = #{productId}
+		</update>
+		
+</mapper>

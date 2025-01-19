@@ -1,0 +1,12 @@
+package com.project.model;
+
+import java.sql.Date;
+
+public class BookingList {
+	  	private int bookingId;
+	    private int userId;
+	    private int productId;
+	    private Date productAdd;
+	    private int productCount;
+	    private String status;
+}

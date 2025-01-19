@@ -1,0 +1,119 @@
+* {
+    margin: 0;
+    padding: 0;
+    font-family:"Hahmlet", serif;
+}
+.booking{
+    display: flex;
+    flex-direction: column;
+    
+
+}
+.booking h2{
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    font-size: 30px;
+    color:rgb(60, 60, 95);
+    margin-top:100px;
+}
+
+.booking-table{
+    display: table;
+    margin: 0 auto;
+    width: 90%;
+    background : rgba(177, 176, 176, 0.205);
+    box-shadow: 0 4px 8px rgba(0, 4, 0, 0.5);
+}
+table{
+    border-collapse: collapse;
+    width: 100%;
+    table-layout: auto;
+    margin: 0;
+}
+
+td,th{
+    padding: 5px 60px;
+    text-align: center;
+    border: 1px solid black;
+}
+
+th:nth-child(1) {
+    width: 1%;
+}
+
+th:nth-child(2) {
+    width: 20%;
+}
+
+th:nth-child(3) {
+    width: 39%;
+}
+
+th:nth-child(4) {
+    width: 20%; 
+}
+
+th:nth-child(5) {
+    width: 10%; 
+}
+
+th:nth-child(6) {
+    width: 10%; 
+}
+.allprice{
+    text-align: center;
+    width: 100%;
+    padding: 20px 0;
+    font-weight: bold;
+}
+
+img{
+    width: 100px;
+    height: 100px;
+    border-radius: 15px;
+}
+
+input[type=text]{
+    width: 40px;
+    height: 10px;
+    font-size: medium;
+    padding: 3px;
+}
+
+.count{
+display: flex;
+}
+
+.count button{
+    background-color: white;
+    border: 1px solid black;
+    display: flex;
+    border-radius: 20px;
+    padding: 5px;
+    font-size: 20px;
+    font-weight: bold;
+    width: 20px;
+    height: 20px;
+    align-items: center;
+    text-align: center;
+    margin: 0 10px;
+    cursor: pointer;
+}
+
+.orderbtn{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 5px 15px;
+    margin: 20px auto;
+    border-radius: 10px;
+    border: none;
+    font-size: large;
+    cursor: pointer;
+}
+
+.orderbtn:hover{
+    background-color: rgb(68, 68, 68);
+    font-weight: bold;
+}

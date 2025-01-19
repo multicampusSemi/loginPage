@@ -1,0 +1,23 @@
+package com.project.mvc.config;
+
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.web.servlet.ViewResolver;
+import org.springframework.web.servlet.view.InternalResourceViewResolver;
+import org.thymeleaf.spring6.view.ThymeleafViewResolver;
+
+@Configuration
+public class WebConfig {
+	
+	@Bean
+	public ViewResolver viewResolver() {
+		ThymeleafViewResolver resolver = new ThymeleafViewResolver();
+		resolver.setPrefix("/templates/");  // 템플릿 폴더 위치
+        resolver.setSuffix(".html");        // 템플릿 파일 확장자
+        resolver.setTemplateMode("HTML");   // 템플릿 모드 설정
+        resolver.setCharacterEncoding("UTF-8"); // 문자 인코딩 설정
+        resolver.setCacheable(false);      // 캐시 설정 (개발 중에는 false가 적당)
+        return resolver;
+    }	
+	
+}

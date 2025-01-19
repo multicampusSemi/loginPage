@@ -1,0 +1,27 @@
+package com.project.service;
+
+import java.util.List;
+
+import org.springframework.stereotype.Service;
+import com.project.mapper.LjmSemiMapper;
+import com.project.model.BookingList;
+
+
+public interface CartService {
+
+	List<BookingList> showbookingitem();
+	
+//	public CartService(LjmSemiMapper cartMapper) {
+//        this.cartMapper = cartMapper;
+//    }
+//	public List<BookingList> showbookingitem(int userId){
+//		return cartMapper.showbookingitem(userId);
+//	}
+//	
+//	
+//	 public void removeProductsFromCart(int userId, List<Integer> productIds) {
+//		 System.out.println("Removing products for user: " + userId + " with IDs: " + productIds);  // 로그 확인
+//		    int rowsDeleted = cartMapper.deleteProductsFromCart(userId, productIds);
+//	 }
+}
+

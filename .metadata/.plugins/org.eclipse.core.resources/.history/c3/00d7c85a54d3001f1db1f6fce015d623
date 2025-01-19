@@ -1,0 +1,13 @@
+package com.project.model;
+
+import lombok.Data;
+
+@Data
+public class Products {
+	private int product_Id;
+	private String product_Name;
+	private String product_Code;
+	private int product_Price;
+	private int shipping_Fee;
+	private String productimage_Url;
+}
