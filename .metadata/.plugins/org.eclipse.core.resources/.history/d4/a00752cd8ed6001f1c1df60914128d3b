@@ -1,0 +1,196 @@
+
+
+package com.project.controller;
+
+import java.util.Arrays;    
+
+import java.util.Arrays;  
+>>>>>>> 2d64a70627c047eae710ae85a7205911f0c7aaaa
+import java.util.List;
+import java.util.stream.Collectors;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.project.model.BookingList;
+import com.project.model.OrderItem;
+<<<<<<< HEAD
+import com.project.model.kdhUser;
+=======
+>>>>>>> 2d64a70627c047eae710ae85a7205911f0c7aaaa
+import com.project.service.CartService;
+import com.project.service.OrderItemService;
+import com.project.service.UsersService;
+
+import jakarta.servlet.http.HttpSession;
+import lombok.RequiredArgsConstructor;
+
+@Controller
+@RequiredArgsConstructor
+public class CartController {
+	private final CartService cartService;	
+	private final UsersService usersService;
+	private final OrderItemService orderService;
+	
+
+
+@GetMapping("/getBookingItems")
+	public @ResponseBody List<BookingList> getBookingItems(HttpSession session) {
+<<<<<<< HEAD
+	kdhUser loggedInUser = (kdhUser) session.getAttribute("loggedInUser");
+	    System.out.println("사용자 id:"+loggedInUser);
+//	    if (loggedInUser == null) {
+//	    	loggedInUser = usersService.getDefaultUserId(); // 기본 사용자 ID 설정
+//	        session.setAttribute("userId", loggedInUser);
+//	    }
+	    System.out.println("사용자 id:"+loggedInUser);
+	    // 사용자에 대한 예약 목록을 가져옴
+	    Integer userId = loggedInUser.getId();
+=======
+	    Integer userId = (Integer) session.getAttribute("userId");
+	    if (userId == null) {
+	        userId = usersService.getDefaultUserId(); // 기본 사용자 ID 설정
+	        session.setAttribute("userId", userId);
+	    }
+
+	    // 사용자에 대한 예약 목록을 가져옴
+>>>>>>> 2d64a70627c047eae710ae85a7205911f0c7aaaa
+	    List<BookingList> bookingItems = cartService.showbookingItem(userId);
+	    
+	    // JSON 형식으로 데이터를 반환
+	    return bookingItems;  // Map을 사용해 JSON 응답을 반환
+	}
+	
+	@GetMapping("/booking")
+	public String getBookingItem(Model model, HttpSession session) {
+<<<<<<< HEAD
+		kdhUser loggedInUser = (kdhUser) session.getAttribute("loggedInUser");
+//		 if (userId == null) {
+//		        userId = usersService.getDefaultUserId();; // 기본 사용자 ID 설정
+//		        session.setAttribute("userId", userId);
+//		    }
+		Integer userId = loggedInUser.getId();
+=======
+		Integer userId = (Integer) session.getAttribute("userId");
+		 if (userId == null) {
+		        userId = usersService.getDefaultUserId();; // 기본 사용자 ID 설정
+		        session.setAttribute("userId", userId);
+		    }
+		 
+>>>>>>> 2d64a70627c047eae710ae85a7205911f0c7aaaa
+		List<BookingList> bookingItems = cartService.showbookingItem(userId);
+		model.addAttribute("bookingItems", bookingItems);
+		return "booking";
+	}
+	
+	 @PostMapping("/cart/delete")
+	    public String deleteSelected(@RequestParam("bookingIds") String bookingIds, HttpSession session) {
+<<<<<<< HEAD
+		 kdhUser loggedInUser = (kdhUser) session.getAttribute("loggedInUser");
+		 Integer userId = loggedInUser.getId();
+=======
+		 Integer userId = (Integer) session.getAttribute("userId");
+>>>>>>> 2d64a70627c047eae710ae85a7205911f0c7aaaa
+		 if(userId == null) {
+			 return "redirect:/kdjloginMain";
+		 }
+		 List<Integer> bookingIdList = Arrays.stream(bookingIds.split(","))
+			        .map(Integer::parseInt) // 문자열을 Integer로 변환
+			        .collect(Collectors.toList());
+
+
+			    // 삭제하려는 상품이 있다면
+			    if (!bookingIdList.isEmpty()) {
+			        cartService.removeProductsFromCart(userId, bookingIdList);
+			    } else {
+			        System.out.println("삭제할 상품이 없습니다.");
+			    }
+		 return "redirect:/booking";
+	    }
+	 
+<<<<<<< HEAD
+	 
+	 
+	 @PostMapping("/order/create")
+	 public String createOrder(@RequestBody List<OrderItem> selectedProducts, HttpSession session) {
+		 kdhUser loggedInUser = (kdhUser) session.getAttribute("loggedInUser");
+		 Integer userId = loggedInUser.getId();
+		    if (userId == null) {
+		        return "redirect:/login";
+		    }
+		    Integer bookingId = selectedProducts.get(0).getBookingId(); // 예시로 첫 번째 제품의 bookingId 사용
+
+		    orderService.saveOrder(userId, selectedProducts);  // 주문 저장
+
+		    return "redirect:/order";
+		}
+	 
+	 
+	 
+	 @GetMapping("/order")
+	 public String getOrderPage(Model model, HttpSession session) {
+	     kdhUser loggedInUser = (kdhUser) session.getAttribute("loggedInUser");
+	     Integer userId = loggedInUser.getId();
+	     if (userId == null) {
+	         return "redirect:/login";
+	     }
+	     
+	     List<OrderItem> orderItems = orderService.getOrders(userId);
+	     int totalPrice = 0;
+	     int totalShippingFee = 0;
+	     
+	     for (OrderItem item : orderItems) {
+	         totalPrice += item.getProductPrice() * item.getQuantity();  // 가격 * 수량
+	         totalShippingFee += item.getShippingFee();  // 배송비 합산
+	     }
+	     
+	     // 총 결제 금액 계산
+	     int totalAmount = totalPrice + totalShippingFee;
+
+	     // 모델에 추가
+	     model.addAttribute("orderItems", orderItems);
+	     model.addAttribute("totalPrice", totalPrice);
+	     model.addAttribute("totalShippingFee", totalShippingFee);
+	     model.addAttribute("totalAmount", totalAmount);
+
+
+	     return "order";  // forward로 처리하여 'order.jsp' 파일을 렌더링
+	 }
+
+	 }
+
+=======
+	 @PostMapping("/order/create")
+	 public String createOrder(@RequestBody List<OrderItem> selectedProducts, HttpSession session) {
+		 Integer userId = (Integer) session.getAttribute("userId");
+		 if(userId == null) {
+			 return "redirect:/login";
+		 }
+		 
+		 orderService.saveOrder(userId, selectedProducts);
+		 return "redirect:/order";
+	 }
+	 
+	 @GetMapping("/order")
+	 public String showOrderPage(Model model, HttpSession session) {
+		 Integer userId = (Integer) session.getAttribute("userId");
+
+		 if (userId == null) {
+		        userId = usersService.getDefaultUserId();; // 기본 사용자 ID 설정
+		        session.setAttribute("userId", userId);
+		    }
+		 List<OrderItem> orders = orderService.getOrders();
+		 model.addAttribute("orderItems", orders);  // 기존대로, JSON 이외의 값도 전달
+		 return "order";
+	 }
+	 
+	
+		
+	 
+}
+>>>>>>> 2d64a70627c047eae710ae85a7205911f0c7aaaa

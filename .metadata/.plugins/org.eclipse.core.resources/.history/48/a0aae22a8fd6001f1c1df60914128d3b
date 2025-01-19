@@ -1,0 +1,140 @@
+package com.project.controller;
+
+import java.util.List;
+import java.util.Locale.Category;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttribute;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import com.project.model.BookingList;
+import com.project.model.KrhProduct;
+import com.project.model.kdhUser;
+import com.project.model.krhCategory;
+import com.project.service.krhProductService;
+
+import jakarta.servlet.http.HttpSession;
+import lombok.RequiredArgsConstructor;
+
+@Controller
+@RequiredArgsConstructor
+public class krhProductController {
+	private final krhProductService krhProductService;
+
+	@GetMapping("/findAll")
+	public String findAll(Model model) {
+		List<KrhProduct> products = krhProductService.findAll();
+		model.addAttribute("products",products);
+		List<krhCategory> categories = krhProductService.getAllCategories(); // 모든 카테고리 목록을 가져옴
+        model.addAttribute("categories", categories); // 카테고리 리스트를 JSP로 전달
+		return "krhproduct";
+	}
+	
+    // 카테고리 목록을 가져와서 상품 페이지에서 카테고리를 선택할 수 있도록 전달
+    @GetMapping("/productpage")
+    public String getProductPage(Model model) {
+        List<krhCategory> categories = krhProductService.getAllCategories(); // 모든 카테고리 목록을 가져옴
+        model.addAttribute("categories", categories); // 카테고리 리스트를 JSP로 전달
+        return "krhproduct";  // 상품 페이지 JSP
+    }
+
+    // 카테고리 클릭 시 해당 카테고리에 속하는 상품들만 보여주기
+    @GetMapping("/productsC")
+    public String getProductsByCategory(@RequestParam("category") String categoryId, Model model) {
+        List<KrhProduct> products = krhProductService.getProductsByCategoryId(categoryId);
+     // 카테고리 목록 가져오기
+        List<krhCategory> categories = krhProductService.getAllCategories();
+        model.addAttribute("products", products);
+        model.addAttribute("categories", categories);
+        model.addAttribute("selectedCategory", categoryId);
+        return "krhproduct"; 
+    }
+	
+	//검색
+	@GetMapping("/search")
+	public String search(@RequestParam("keyword") String keyword, Model model) {
+	    // 검색어 출력 (디버깅용)
+	    
+	    if (keyword.isEmpty()) { // 검색어가 빈 값일 때
+	        model.addAttribute("products", null);  // 빈 리스트 혹은 null을 설정
+	        model.addAttribute("message", "찾으시는 상품이 없습니다.");
+	    } else {
+	    	List<KrhProduct> products = krhProductService.productPageSearch(keyword);
+	        model.addAttribute("products", products);
+	        List<krhCategory> categories = krhProductService.getAllCategories(); // 모든 카테고리 목록을 가져옴
+	        model.addAttribute("categories", categories); // 카테고리 리스트를 JSP로 전달
+	        if (products.isEmpty()) { // 검색어에 해당하는 상품이 없을 때
+	            model.addAttribute("message", "찾으시는 상품이 없습니다.");
+	        }
+	    }
+	    return "krhproduct";  // 상품을 보여줄 JSP 페이지
+	}
+	
+	 	@GetMapping("/krhagreement")
+	    public String agreement() {
+	        return "krhagreement"; // 이 파일은 /WEB-INF/views/krhagreement.jsp에 위치해야 합니다.
+	    }
+	 	@GetMapping("/krhprivacy")
+	    public String privacy() {
+	        return "krhprivacy"; // 이 파일은 /WEB-INF/views/krhagreement.jsp에 위치해야 합니다.
+	    }
+	 
+		//장바구니에 추가
+		// 장바구니에 상품 추가
+	 	@PostMapping("/addcart")
+	    public String addToCart(@RequestParam("productId") Integer productId,
+                @RequestParam("productCount") Integer productCount,
+                HttpSession session, // 세션에서 loggedInUser 객체를 가져옴
+<<<<<<< HEAD
+                Model model, RedirectAttributes redirectAttributes) {
+	 	// HttpSession에서 loggedInUser를 가져옵니다.
+	 	    kdhUser loggedInUser = (kdhUser) session.getAttribute("loggedInUser");
+	 	    if (loggedInUser == null) {
+	 	    	redirectAttributes.addFlashAttribute("message", "로그인 후 이용해 주세요.");
+	 	        return "redirect:/findAll"; // 로그인 페이지로 리다이렉트
+	 	    }
+
+	 	    Integer userId = loggedInUser.getId();
+	 	    System.out.println("상품페이지 id:"+userId);
+	 	    System.out.println("Received quantity: " + productCount);
+=======
+                Model model, String productdescription) {
+	 		if (productCount == null || productCount <= 0) {
+	 	        productCount = 1;
+	 	    }
+	 	// HttpSession에서 loggedInUser를 가져옵니다.
+	 	    kdhUser loggedInUser = (kdhUser) session.getAttribute("loggedInUser");
+	 	    if (loggedInUser == null) {
+	 	        model.addAttribute("message", "로그인 후 이용해 주세요.");
+	 	        return "redirect:/login"; // 로그인 페이지로 리다이렉트
+	 	    }
+
+	 	    Integer userId = loggedInUser.getId();
+	 	    System.out.println("Received quantity: " + productCount);
+
+>>>>>>> 2d64a70627c047eae710ae85a7205911f0c7aaaa
+	 	    // 장바구니에 추가할 상품 객체 생성
+	 	    BookingList bookingList = new BookingList();
+	 	    bookingList.setUserId(userId);
+	 	    bookingList.setProductId(productId);
+	 	    bookingList.setProductCount(1);
+<<<<<<< HEAD
+=======
+	 	    bookingList.setProductdescription(productdescription);
+>>>>>>> 2d64a70627c047eae710ae85a7205911f0c7aaaa
+
+	 	    // 장바구니에 상품 추가
+	 	    krhProductService.addToCart(bookingList);
+
+<<<<<<< HEAD
+	 	   redirectAttributes.addFlashAttribute("message", "상품이 장바구니에 추가되었습니다.");
+=======
+	 	    model.addAttribute("message", "상품이 장바구니에 추가되었습니다.");
+>>>>>>> 2d64a70627c047eae710ae85a7205911f0c7aaaa
+	 	    return "redirect:/booking";
+	    }
+}

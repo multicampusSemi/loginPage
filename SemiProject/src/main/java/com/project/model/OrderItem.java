@@ -8,12 +8,12 @@ public class OrderItem {
     private int quantity;
     private int productPrice;
     private int bookingId;
+    private int productCount;
     private int totalAmount;
     private int shippingFee;
     private int productId;
     private int userId;
     private String status;
-    
     
     public String getProductName() {
         return productName;
@@ -39,4 +39,5 @@ public class OrderItem {
     public void setTotalAmount(int totalAmount) {
         this.totalAmount = totalAmount;  // 총 금액 설정
     }
+
 }

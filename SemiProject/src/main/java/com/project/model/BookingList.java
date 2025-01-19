@@ -12,15 +12,17 @@ public class BookingList {
 	    private Date productAdd;
 	    private int productCount;
 	    private String status;
+	    private String photo;
 	    private String productName;
 	    private int productPrice;
 	    private int shippingfee;
 	    private String productdescription;
-
+	    
 	    public String getProductdescription() {
 	        return productdescription;
 	    }
 
+	    // productdescription 필드에 대한 setter 추가
 	    public void setProductdescription(String productdescription) {
 	        this.productdescription = productdescription;
 	    }
@@ -33,5 +35,8 @@ public class BookingList {
 	        this.shippingfee = shippingfee;
 	    }
 
-	    	
+		public void setQuantity(Integer quantity) {
+			// TODO Auto-generated method stub
+			
+		}
 }

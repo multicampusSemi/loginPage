@@ -7,7 +7,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import com.project.model.KrhProduct;
-import com.project.model.krhCategory;
 import com.project.service.krhProductService;
 
 import lombok.RequiredArgsConstructor;

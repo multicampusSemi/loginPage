@@ -1,0 +1,58 @@
+package com.project.model;
+
+import lombok.Data;
+
+@Data
+public class OrderItem {
+	private String productName;
+    private int quantity;
+    private int productPrice;
+<<<<<<< HEAD
+    private int bookingId;
+    private int totalAmount;
+    private int shippingFee;
+    private int productId;
+    private int userId;
+    private String status;
+    
+=======
+    private int totalAmount;
+    private int shippingFee;
+    private int productId;
+>>>>>>> 2d64a70627c047eae710ae85a7205911f0c7aaaa
+    
+    public String getProductName() {
+        return productName;
+    }
+
+    public void setProductName(String productName) {
+        this.productName = productName;
+    }
+<<<<<<< HEAD
+    public int getShippingFee() {
+        return this.shippingFee;
+    }
+
+    // shippingFee를 설정하는 setter
+    public void setShippingFee(int shippingFee) {
+        this.shippingFee = shippingFee;
+    }
+
+    // 총 금액 계산을 위한 getter
+    public int getTotalAmount() {
+        return totalAmount;
+    }
+
+    public void setTotalAmount(int totalAmount) {
+        this.totalAmount = totalAmount;  // 총 금액 설정
+=======
+    
+    public int getshippingFee() {
+    	return shippingFee;
+    }
+    
+    public void setshippingFee() {
+    	this.shippingFee = shippingFee;
+>>>>>>> 2d64a70627c047eae710ae85a7205911f0c7aaaa
+    }
+}

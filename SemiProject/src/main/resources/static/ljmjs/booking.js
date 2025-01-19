@@ -26,12 +26,12 @@ function generateProductRows(bookingItems) {
         row.innerHTML = `
             <td><input type="checkbox" class="select-check" data-id="${item.bookingId}" onchange="updateShippingFee(bookingItems)"/></td>
             <td><img src="${item.photo}" alt="${item.productName}"/><br/>${item.productName}</td>
-            <td><p>${item.productdescription}</p></td>
             <td>${item.shippingFee}</td>
             <td>
                 <div class="count">
                     <button   onclick="decrease(${index})">-</button>
-                    <input type="text" id="numberInput${index}" value="${item.productCount}" onchange="updateShippingFee()" min="0"/>
+                    <input type="text" id="numberInput${index}" value="${item.productCount}" onchange="updateShippingFee(bookingItems)" min="1"/>
+
                     <button   onclick="increase(${index})">+</button>
                 </div>
                 <p>수량</p>
@@ -87,6 +87,10 @@ function updateShippingFee(bookingItems) {
                 const item = bookingItems[index];
                 
                 const quantity = parseInt(document.getElementById(`numberInput${index}`).value);  // .value 추가
+                 if (isNaN(quantity) || quantity < 1) {
+                    quantity = 1;  // 유효하지 않으면 기본값 1로 설정
+                    document.getElementById(`numberInput${index}`).value = quantity;  // HTML 요소에 기본값 반영
+                }
                 const shippingFee = parseFloat(item.shippingFee);
                 const price = parseFloat(item.productPrice);
 				

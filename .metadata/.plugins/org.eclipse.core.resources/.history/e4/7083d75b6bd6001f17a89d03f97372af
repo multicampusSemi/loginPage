@@ -1,0 +1,38 @@
+package com.project.model;
+
+import java.sql.Date;
+
+import lombok.Data;
+
+
+public class BookingList {
+	  	private int bookingId;
+	    private int userId;
+	    private int productId;
+	    private Date productAdd;
+	    private int productCount;
+	    private String status;
+	    private String productName;
+	    private int productPrice;
+	    private int shippingfee;
+	    private String photo;
+	    private String productdescription;
+
+	    public String getProductdescription() {
+	        return productdescription;
+	    }
+
+	    public void setProductdescription(String productdescription) {
+	        this.productdescription = productdescription;
+	    }
+	    
+	    public int getShippingFee() {
+	        return shippingfee;
+	    }
+
+	    public void setShippingFee(int shippingfee) {
+	        this.shippingfee = shippingfee;
+	    }
+
+	    	
+}

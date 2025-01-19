@@ -39,9 +39,6 @@
     <fullyQualifiedTypeName name="org.springframework.context.annotation.ComponentScan"/>
     <fullyQualifiedTypeName name="com.project.model.Products"/>
     <fullyQualifiedTypeName name="com.project.model.Orders"/>
-    <fullyQualifiedTypeName name="com.project.service.krhProductService"/>
-    <fullyQualifiedTypeName name="org.springframework.stereotype.Service"/>
-    <fullyQualifiedTypeName name="lombok.RequiredArgsConstructor"/>
     <fullyQualifiedTypeName name="com.project.mapper.LjmSemiMapper"/>
     <fullyQualifiedTypeName name="java.security.Timestamp"/>
     <fullyQualifiedTypeName name="java.sql.Date"/>
@@ -50,10 +47,16 @@
     <fullyQualifiedTypeName name="com.project.model.BookingList"/>
     <fullyQualifiedTypeName name="java.util.HashMap"/>
     <fullyQualifiedTypeName name="java.util.Map"/>
-    <fullyQualifiedTypeName name="lombok.Data"/>
     <fullyQualifiedTypeName name="com.fasterxml.jackson.databind.ObjectMapper"/>
-    <fullyQualifiedTypeName name="com.project.model.OrderItem"/>
     <fullyQualifiedTypeName name="com.project.service.UsersService"/>
     <fullyQualifiedTypeName name="com.project.service.CartService"/>
     <fullyQualifiedTypeName name="com.project.model.kdhUser"/>
+    <fullyQualifiedTypeName name="lombok.Data"/>
+    <fullyQualifiedTypeName name="com.project.model.OrderItem"/>
+    <fullyQualifiedTypeName name="com.project.service.krhProductService"/>
+    <fullyQualifiedTypeName name="com.project.service.KrhProductServiceImpl"/>
+    <fullyQualifiedTypeName name="com.project.controller.kthMainController"/>
+    <fullyQualifiedTypeName name="lombok.RequiredArgsConstructor"/>
+    <fullyQualifiedTypeName name="org.springframework.stereotype.Service"/>
+    <fullyQualifiedTypeName name="com.project.SemiProjectApplication"/>
 </qualifiedTypeNameHistroy>

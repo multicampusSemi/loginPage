@@ -1,6 +1,7 @@
 package com.project.controller;
 
-import java.util.Arrays;   
+import java.util.Arrays;    
+
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.project.model.BookingList;
 import com.project.model.OrderItem;
+import com.project.model.kdhUser;
 import com.project.service.CartService;
 import com.project.service.OrderItemService;
 import com.project.service.UsersService;
@@ -32,7 +34,15 @@ public class CartController {
 
 @GetMapping("/getBookingItems")
 	public @ResponseBody List<BookingList> getBookingItems(HttpSession session) {
-	    Integer userId = (Integer) session.getAttribute("userId");
+	kdhUser loggedInUser = (kdhUser) session.getAttribute("loggedInUser");
+	    System.out.println("사용자 id:"+loggedInUser);
+//	    if (loggedInUser == null) {
+//	    	loggedInUser = usersService.getDefaultUserId(); // 기본 사용자 ID 설정
+//	        session.setAttribute("userId", loggedInUser);
+//	    }
+	    System.out.println("사용자 id:"+loggedInUser);
+	    // 사용자에 대한 예약 목록을 가져옴
+	    Integer userId = loggedInUser.getId();
 	    if (userId == null) {
 	        userId = usersService.getDefaultUserId(); // 기본 사용자 ID 설정
 	        session.setAttribute("userId", userId);
@@ -47,7 +57,12 @@ public class CartController {
 	
 	@GetMapping("/booking")
 	public String getBookingItem(Model model, HttpSession session) {
-		Integer userId = (Integer) session.getAttribute("userId");
+		kdhUser loggedInUser = (kdhUser) session.getAttribute("loggedInUser");
+//		 if (userId == null) {
+//		        userId = usersService.getDefaultUserId();; // 기본 사용자 ID 설정
+//		        session.setAttribute("userId", userId);
+//		    }
+		Integer userId = loggedInUser.getId();
 		 if (userId == null) {
 		        userId = usersService.getDefaultUserId();; // 기본 사용자 ID 설정
 		        session.setAttribute("userId", userId);
@@ -60,7 +75,8 @@ public class CartController {
 	
 	 @PostMapping("/cart/delete")
 	    public String deleteSelected(@RequestParam("bookingIds") String bookingIds, HttpSession session) {
-		 Integer userId = (Integer) session.getAttribute("userId");
+		 kdhUser loggedInUser = (kdhUser) session.getAttribute("loggedInUser");
+		 Integer userId = loggedInUser.getId();
 		 if(userId == null) {
 			 return "redirect:/kdjloginMain";
 		 }
@@ -82,11 +98,11 @@ public class CartController {
 	 
 	 @PostMapping("/order/create")
 	 public String createOrder(@RequestBody List<OrderItem> selectedProducts, HttpSession session) {
-		    Integer userId = (Integer) session.getAttribute("userId");
+		 kdhUser loggedInUser = (kdhUser) session.getAttribute("loggedInUser");
+		 Integer userId = loggedInUser.getId();
 		    if (userId == null) {
 		        return "redirect:/login";
 		    }
-
 		    Integer bookingId = selectedProducts.get(0).getBookingId(); // 예시로 첫 번째 제품의 bookingId 사용
 
 		    orderService.saveOrder(userId, selectedProducts);  // 주문 저장
@@ -98,7 +114,8 @@ public class CartController {
 	 
 	 @GetMapping("/order")
 	 public String getOrderPage(Model model, HttpSession session) {
-	     Integer userId = (Integer) session.getAttribute("userId");
+	     kdhUser loggedInUser = (kdhUser) session.getAttribute("loggedInUser");
+	     Integer userId = loggedInUser.getId();
 	     if (userId == null) {
 	         return "redirect:/login";
 	     }
@@ -125,6 +142,9 @@ public class CartController {
 	     return "order";  // forward로 처리하여 'order.jsp' 파일을 렌더링
 	 }
 
-	 }
 
-
+}
+	 
+	
+		
+	 
