@@ -18,9 +18,9 @@ br{
     background : rgba(177, 176, 176, 0.205);
 }
 .order-item-main{
-    margin-left: 100px;
+    margin-left: 50px;
     background : rgba(177, 176, 176, 0.205);
-    width: 70%;
+    width: 90%;
     box-shadow: 0 4px 8px rgba(0, 4, 0, 0.5);
 }
 
@@ -52,10 +52,11 @@ br{
 }
 
 .buy button{
+	border: none;
     margin-top: 15px;
-    padding: 5px 20px;
+    padding: 5px 10px;
     border-radius: 15px;
-    border: 0px black;
+    border: 1px solid black;
     margin-right: 100px;
     margin-bottom: 100px;
 }
