@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.project.mapper.kdhSemiMapper">
+
+    <!-- 사용자 이름으로 사용자 검색 -->
+    <select id="findUserByUsername" parameterType="string" resultType="com.project.model.kdhUser">
+        SELECT * 
+        FROM users 
+        WHERE username = #{username}
+    </select>
+
+    <!-- 사용자 존재 여부 확인 (이름 + 이메일) -->
+    <select id="checkUserExistsByNameAndEmail" resultType="int">
+        SELECT COUNT(*)
+        FROM users
+        WHERE name = #{name} AND email = #{email}
+    </select>
+
+    <!-- 이메일 인증번호 저장 -->
+    <insert id="saveVerificationCode">
+        INSERT INTO email_verification (email, code, created_at)
+        VALUES (#{email}, #{code}, NOW())
+    </insert>
+
+    <!-- 이메일 인증번호 조회 -->
+  <select id="getVerificationCodeByEmail" resultType="string">
+    SELECT code
+    FROM email_verification
+    WHERE email = #{email}
+      AND verified = 0 
+      AND created_at >= DATE_SUB(NOW(), INTERVAL 10 MINUTE); 
+</select>
+
+    <!-- 이메일로 비밀번호 업데이트 -->
+    <update id="updatePasswordByEmail">
+        UPDATE users
+        SET password = #{password}
+        WHERE email = #{email}
+    </update>
+	<update id="updateEmailVerifiedStatus" parameterType="string">
+    UPDATE email_verification
+    SET verified = 1
+    WHERE email = #{email};
+</update>
+<!-- 이메일 아이디 이름 검사 -->
+ <select id="findUserByEmailUsernameAndName" resultType="com.project.model.kdhUser">
+        SELECT * 
+        FROM users
+        WHERE email = #{email}
+          AND username = #{username}
+          AND name = #{name}
+    </select>
+    <!-- 사용자 등록 -->
+    <insert id="insertUser" parameterType="com.project.model.kdhUser">
+        INSERT INTO users (
+            name, birth_year, birth_month, birth_day, phone, home_phone, 
+            username, password, zipcode, address, address_detail, email, email_verified, 
+            role, is_active, created_at, updated_at
+        ) VALUES (
+            #{name}, #{birthYear}, #{birthMonth}, #{birthDay}, #{phone}, #{homePhone}, 
+            #{username}, #{password}, #{zipcode}, #{address}, #{address_detail}, #{email}, #{emailVerified}, 
+            #{role}, #{isActive}, #{createdAt}, #{updatedAt}
+        )
+    </insert>
+	 <!-- 사용자 정보 업데이트 -->
+      <!-- 사용자 정보 업데이트 -->
+    <update id="updateUser">
+        UPDATE users
+        SET
+            name = #{name},
+            email = #{email},
+            password = #{password},
+            birth_year = #{birthYear},
+            birth_month = #{birthMonth},
+            birth_day = #{birthDay},
+            phone = #{phone},
+            home_phone = #{homePhone},
+            zipcode = #{zipcode},
+            address = #{address},
+            address_detail = #{address_detail},
+            updated_at = CURRENT_TIMESTAMP
+        WHERE
+            username = #{username}
+    </update>
+
+
+
+    <!-- 사용자 정보 조회 -->
+    <select id="findUserById" resultType="com.project.model.kdhUser">
+        SELECT *
+        FROM users
+        WHERE username = #{username}
+    </select>
+<select id="findUsernameByNameAndEmail" resultType="string">
+    SELECT username
+    FROM users
+    WHERE name = #{name} AND email = #{email}
+</select>
+
+
+    <!-- 사용자 이름 존재 여부 확인 -->
+    <select id="checkUsernameExists" parameterType="string" resultType="int">
+        SELECT COUNT(*) 
+        FROM users 
+        WHERE username = #{username}
+    </select>
+	 <!-- 이메일 중복 확인 쿼리 -->
+    <select id="countByEmail" parameterType="string" resultType="int">
+        SELECT COUNT(*) 
+        FROM users 
+        WHERE email = #{email}
+    </select>
+    <!-- 이메일 존재 여부 확인 -->
+    <select id="checkEmailExists" parameterType="string" resultType="int">
+        SELECT COUNT(*) 
+        FROM users 
+        WHERE email = #{email}
+    </select>
+	<select id="isEmailVerified" resultType="int">
+    SELECT COUNT(*)
+    FROM email_verification
+    WHERE email = #{email}
+      AND verified = 1 -- 인증 완료된 상태
+</select>
+<update id="setVerificationComplete">
+    UPDATE email_verification
+    SET verified = 1
+    WHERE email = #{email};
+</update>
+
+
+</mapper>

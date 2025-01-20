@@ -28,4 +28,5 @@ public interface kdhSemiMapper {
 
     kdhUser findUserById(String username); // 사용자 조회 메서드
     Integer countByEmail(String email);
+    int countByPhone(String phone);
 }

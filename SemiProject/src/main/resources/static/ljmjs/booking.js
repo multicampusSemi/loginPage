@@ -121,7 +121,7 @@ function calculateTotalPrice(bookingItems) {
 }
 
 
-
+l
 
 
 function allCheck(){

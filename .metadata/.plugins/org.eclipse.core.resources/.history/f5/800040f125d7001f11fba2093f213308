@@ -12,7 +12,7 @@ $.ajax({
 });
 
 function generateProductRows(bookingItems) {
-     console.log("bookginItems:",bookingItems); // 제대로 전달된 배열을 확인
+     console.log("bookingItems:",bookingItems); // 제대로 전달된 배열을 확인
   
     
     const table = document.querySelector('.booking-table tbody');
@@ -24,19 +24,18 @@ function generateProductRows(bookingItems) {
     bookingItems.forEach((item, index) => {
         const row = document.createElement('tr');
         row.innerHTML = `
-            <td><input type="checkbox" class="select-check" data-id="${item.bookingId}" onchange="updateShippingFee(bookingItems)"/></td>
+            <td><input type="checkbox" class="select-check" data-id="${item.productId}" onchange="updateShippingFee(bookingItems)"/></td>
             <td><img src="${item.photo}" alt="${item.productName}"/><br/>${item.productName}</td>
-            <td><p>${item.productdescription}</p></td>
             <td>${item.shippingFee}</td>
             <td>
                 <div class="count">
                     <button   onclick="decrease(${index})">-</button>
-                    <input type="text" id="numberInput${index}" value="${item.productCount}" onchange="updateShippingFee()" min="0"/>
+                    <input type="text" id="numberInput${index}" value="${item.productCount}" onchange="updateShippingFee(bookingItems)" min="1"/>
+
                     <button   onclick="increase(${index})">+</button>
                 </div>
-                <p>수량</p>
             </td>
-             <td id="price-${item.bookingId}">${item.productPrice}</td>
+             <td id="price-${item.bookingId}" class="product-price">${item.productPrice}</td>
         `;
 //			 <td id="price-${index}">${parseInt(parseFloat(item.productPrice) * parseInt(item.productCount))}</td>
         table.appendChild(row);
@@ -87,6 +86,10 @@ function updateShippingFee(bookingItems) {
                 const item = bookingItems[index];
                 
                 const quantity = parseInt(document.getElementById(`numberInput${index}`).value);  // .value 추가
+                 if (isNaN(quantity) || quantity < 1) {
+                    quantity = 1;  // 유효하지 않으면 기본값 1로 설정
+                    document.getElementById(`numberInput${index}`).value = quantity;  // HTML 요소에 기본값 반영
+                }
                 const shippingFee = parseFloat(item.shippingFee);
                 const price = parseFloat(item.productPrice);
 				
@@ -133,26 +136,21 @@ function allCheck(){
 function order() {
     const selectedProducts = [];
     const rows = document.querySelectorAll('.booking-table tbody tr');
-    rows.forEach((row,index) => {
+    rows.forEach((row) => {
         const checkbox = row.querySelector('.select-check');
         if (checkbox && checkbox.checked) {
-			
             const productId = checkbox.getAttribute('data-id');  // data-id 속성에서 productId 가져오기
             const quantityInput = row.querySelector('input[id^="numberInput"]');
             const quantity = quantityInput ? quantityInput.value : 0;  // 수량 값을 가져오기
-			
-		
-
-            
+			const price = parseInt(row.querySelector('.product-price').textContent,10);  // 상품 가격 가져오기 
             // productId와 quantity가 모두 존재할 때만 선택된 상품 추가
-            if (productId && quantity && quantity > 0) {
-                selectedProducts.push({ 
-                    productId: productId, 
-                    quantity: quantity, 
-                });
+            if (productId && quantity && quantity > 0 && price) {
+                selectedProducts.push({ productId: productId, quantity: quantity, productPrice: price});
             }
         }
     });
+    
+     console.log('Selected products:', selectedProducts);
     if (selectedProducts.length > 0) {
         $.ajax({
             url: '/order/create',

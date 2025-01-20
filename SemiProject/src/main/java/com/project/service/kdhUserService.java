@@ -23,6 +23,9 @@ public class kdhUserService {
         }
         return user;
     }
+    public boolean isPhoneNumberExists(String phone) {
+        return mapper.countByPhone(phone) > 0;
+    }
     public kdhUser getCurrentUser(String username) {
         return mapper.findUserById(username);
     }

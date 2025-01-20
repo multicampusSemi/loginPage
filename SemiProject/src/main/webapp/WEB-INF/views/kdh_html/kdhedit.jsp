@@ -10,6 +10,7 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/kdh_css/edit.css">
 </head>
 <body>
+<%@ include file="/WEB-INF/views/krhheader.jsp" %>
     <div class="container">
         <!-- 왼쪽 사이드바 -->
 <nav class="sidebar">
@@ -84,7 +85,7 @@
 				</div>
                <div class="form-group">
                    <label for="address">상세주소</label>
-                   <input type="text" id="addressDetail" name="address_detail" placeholder="상세주소를 입력하세요" value="${user.address_detail}">
+                   <input type="text" id="addressDetail" name="addressDetail" placeholder="상세주소를 입력하세요" value="${user.addressDetail}">
                </div>
                <div class="form-group">
         <label for="email">이메일 </label>
@@ -113,6 +114,9 @@
             </div>
         </main>
     </div>
+    <div id="footers"
+<%@ include file="/WEB-INF/views/krhfooter.jsp" %> 
+</div>
 </body>
 <script src="${pageContext.request.contextPath}/kdh_js/edit.js" defer></script>
 </html>

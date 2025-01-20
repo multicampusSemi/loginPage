@@ -4,9 +4,13 @@
 
     <!-- 사용자 이름으로 사용자 검색 -->
     <select id="findUserByUsername" parameterType="string" resultType="com.project.model.kdhUser">
-        SELECT * 
-        FROM users 
-        WHERE username = #{username}
+        SELECT 
+        id, name, birth_year AS birthYear, birth_month AS birthMonth, birth_day AS birthDay,
+        phone, home_phone AS homePhone, username, password, zipcode, address, 
+        address_detail AS addressDetail, email, email_verified AS emailVerified, 
+        role, is_active AS isActive, created_at AS createdAt, updated_at AS updatedAt
+    FROM users
+    WHERE username = #{username}
     </select>
 
     <!-- 사용자 존재 여부 확인 (이름 + 이메일) -->
@@ -58,7 +62,7 @@
             role, is_active, created_at, updated_at
         ) VALUES (
             #{name}, #{birthYear}, #{birthMonth}, #{birthDay}, #{phone}, #{homePhone}, 
-            #{username}, #{password}, #{zipcode}, #{address}, #{address_detail}, #{email}, #{emailVerified}, 
+            #{username}, #{password}, #{zipcode}, #{address}, #{addressDetail}, #{email}, #{emailVerified}, 
             #{role}, #{isActive}, #{createdAt}, #{updatedAt}
         )
     </insert>
@@ -77,13 +81,15 @@
             home_phone = #{homePhone},
             zipcode = #{zipcode},
             address = #{address},
-            address_detail = #{address_detail},
+            address_detail = #{addressDetail},
             updated_at = CURRENT_TIMESTAMP
         WHERE
             username = #{username}
     </update>
-
-
+	<!-- 휴대폰 중복 조회 쿼리 -->
+	  <select id="countByPhone" resultType="int" parameterType="String">
+        SELECT COUNT(*) FROM users WHERE phone = #{phone}
+    </select>
 
     <!-- 사용자 정보 조회 -->
     <select id="findUserById" resultType="com.project.model.kdhUser">

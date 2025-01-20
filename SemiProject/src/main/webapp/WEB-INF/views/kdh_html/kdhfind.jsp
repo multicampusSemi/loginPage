@@ -13,9 +13,7 @@
 </head>
 
 <body>
-  <header>
-    <h1>회사명</h1>
-  </header>
+ <%@ include file="/WEB-INF/views/krhheader.jsp" %>
 
   <div class="container">
     <h1>Find ID/PW</h1>
@@ -88,5 +86,8 @@
     </div>
   </div>
   <script src="${pageContext.request.contextPath}/kdh_js/find.js"></script>
+     <div id="footers">
+        <%@ include file="/WEB-INF/views/krhfooter.jsp" %>
+        </div>
 </body>
 </html>

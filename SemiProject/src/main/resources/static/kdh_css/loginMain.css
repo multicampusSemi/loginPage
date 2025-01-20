@@ -49,11 +49,11 @@ h2 {
 
 /* 로그인 컨테이너 */
 .login-container {
-   background-color: rgba(177, 176, 176, 0.205);
-  width: 500px;
-  margin-top:200px;
-  margin-bottom:200px;
+  background: #fff;
+  width: 100%;
+  max-width: 400px;
   height: 500px;
+  margin: 50px auto;
   padding: 20px;
   border-radius: 12px;
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
@@ -475,7 +475,9 @@ label.required::before {
   width: 300px;
   font-family: "Hahmlet", serif;
 }
-
+#send-code-btn{
+	display:none;
+}
 .cancel-btn {
   background: linear-gradient(120deg, #aaaaaa, #aaaaaa);
   background-color: transparent;
@@ -522,6 +524,19 @@ label.required::before {
   font-size: 14px;
   line-height: 1.5;
   margin: 0;
+}
+#phone-error{
+	 color: red;
+  font-size: 12px;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  display: none;
+  white-space: nowrap;
+  pointer-events: none;
+  text-align: center;
+  margin-left: 210px;
+  font-weight: bold;
 }
 .email-error,.username-error{
 	 color: red;
@@ -624,6 +639,3 @@ input#address {
   text-align: left;
   margin-top: 5px;
 }
-
-
-

@@ -8,7 +8,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @Builder
 public class kdhUser {
-    private Integer id;                      // 고유 사용자 ID
+	private Integer id;                      // 고유 사용자 ID
     private String name;                     // 사용자 이름
     private Integer birthYear;               // 출생 연도
     private Byte birthMonth;                 // 출생 월
