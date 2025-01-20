@@ -83,6 +83,7 @@ input[type=text]{
 
 .count{
 display: flex;
+justify-content: center;
 }
 
 .count button{

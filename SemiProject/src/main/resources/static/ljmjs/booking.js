@@ -34,7 +34,6 @@ function generateProductRows(bookingItems) {
 
                     <button   onclick="increase(${index})">+</button>
                 </div>
-                <p>수량</p>
             </td>
              <td id="price-${item.bookingId}" class="product-price">${item.productPrice}</td>
         `;

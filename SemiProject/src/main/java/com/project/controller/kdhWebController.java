@@ -31,7 +31,7 @@ public class kdhWebController {
         }
 
         model.addAttribute("user", loggedInUser);
-        return "kdh_html/main";
+        return "/krhmain";
     }
 
     @GetMapping("/loginMain")
@@ -231,7 +231,7 @@ public class kdhWebController {
                 System.out.println("로그인 성공: " + username);
                 System.out.println("세션에 저장된 username: " + user.getUsername());
 
-                return "kdh_html/main"; // 메인 페이지로 이동
+                return "/krhmain"; // 메인 페이지로 이동
             } else {
                 // 비밀번호 불일치
                 model.addAttribute("loginError", "아이디 또는 비밀번호가 올바르지 않습니다.");

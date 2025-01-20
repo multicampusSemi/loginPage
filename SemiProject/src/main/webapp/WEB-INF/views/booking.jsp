@@ -21,7 +21,6 @@
             <tr>
                 <th><input type="checkbox" id="all-check" onclick="allCheck()"/></th>
                 <th>상품명</th>
-                <th>상세설명</th>
                 <th>배송비</th>
                 <th>수량</th>
                 <th>가격</th>

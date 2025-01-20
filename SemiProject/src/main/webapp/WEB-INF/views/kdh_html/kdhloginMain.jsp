@@ -6,10 +6,14 @@
 <html>
 <head>
     <title>로그인 메인</title>
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Hahmlet:wght@100..900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/kdh_css/loginMain.css">
 	<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 </head>
 <body id="body">
+    <%@ include file="/WEB-INF/views/krhheader.jsp" %>
 <% 
     String message = (String) request.getAttribute("message");
     String error = (String) request.getAttribute("error");
@@ -54,6 +58,9 @@
             <a href="/user/find-id-page?tab=password">비밀번호 찾기</a>
         </div>
     </form>
+</div>
+ <div id="footers"
+<%@ include file="/WEB-INF/views/krhfooter.jsp" %> 
 </div>
 <div id="modal" class="hidden">
   <div class="modal-content">
