@@ -7,6 +7,9 @@
     <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
     <title>마이페이지</title>
     <!-- CSS -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Hahmlet:wght@100..900&display=swap" rel="stylesheet">    
 <link rel="stylesheet" href="${pageContext.request.contextPath}/kdh_css/edit.css">
 </head>
 <body>

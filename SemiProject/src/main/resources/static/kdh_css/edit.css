@@ -2,19 +2,25 @@
 /* 컨테이너 및 레이아웃 */
 .container {
     display: flex;
-    height: 100vh;
+    height: 100%;
     overflow: hidden;
     max-width: 100%;
+    margin-top: 100px;
+    margin-bottom: 100px;
 }
 body {
     overflow-x: hidden; /* 가로 스크롤바 강제 제거 */
+
 }
 /* 왼쪽 사이드바 */
 .sidebar {
+	margin-top: 45px;
+	margin-bottom: 45px;
     width: 250px;
     background-color: #3c3c3c; /* 검은색으로 변경 */
     color: white;
     padding-top: 20px;
+    font-family:"Hahmlet", serif;
     box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
 }
 
@@ -47,7 +53,6 @@ body {
 .content {
     flex: 1; /* 남은 공간을 차지 */
     padding: 20px; /* 내부 여백 */
-    background-color: #F9F9F9; /* 콘텐츠 배경색 */
     box-sizing: border-box; /* padding 포함 크기 */
     overflow: auto; /* 스크롤 가능 */
     padding-top: 10px; /* 상단 여백 조정 */
@@ -61,6 +66,9 @@ body {
     justify-self: center;
     margin-top: 100px;
     margin-bottom: 100px;
+}
+h1{
+	margin-bottom: 80px;
 }
 
 .agreement .am header {
@@ -81,7 +89,7 @@ main{
     max-height: 90%; /* 화면 높이를 초과하지 않도록 제한 */
     overflow-y: none; /* 내부 스크롤 활성화 */
 	margin: auto;
-	height: 1000px;
+	height: auto;
 }
 
 .agreement .am main {
@@ -89,7 +97,6 @@ main{
     padding: 50px;
     background-color: rgba(177, 176, 176, 0.205);
     border-radius: 15px;
-    box-shadow: 0 4px 8px rgba(0, 4, 0, 0.5);
     font-size: 18px;
 }
 

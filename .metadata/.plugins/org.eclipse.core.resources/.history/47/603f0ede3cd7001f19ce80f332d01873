@@ -1,0 +1,61 @@
+*{
+    margin: 0;
+    padding: 0;
+    font-family:"Hahmlet", serif;
+}
+h2{
+    font-size: 30px;
+    color:rgb(60, 60, 95);
+    text-align: center;
+    margin-bottom: 50px;
+    margin-top:100px;
+}
+hr{
+    width: 90%;
+    margin-left: 50px;
+}
+br{
+    background : rgba(177, 176, 176, 0.205);
+}
+.order-item-main{
+    margin-left: 25%;
+    background : rgba(177, 176, 176, 0.205);
+    width: 60%;
+    box-shadow: 0 4px 8px rgba(0, 4, 0, 0.5);
+}
+
+.order-item-table{
+    margin-bottom: 15px;
+    margin-top: 15px;
+    margin-left: 30px;
+}
+
+.order-item-main img{
+    border-radius: 15px;
+}
+
+
+.price{
+    text-align: right;
+    margin-right: 150px;
+    font-size: large;
+    font-weight: bold;
+}
+
+.price p {
+    margin-top: 10px;
+}
+
+.buy{
+    text-align: right;
+    margin-right: 50px;
+}
+
+.buy button{
+    margin-top: 15px;
+    padding: 5px 20px;
+    border-radius: 15px;
+    border: 0px black;
+    margin-right: 100px;
+    margin-bottom: 100px;
+}
