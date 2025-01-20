@@ -133,9 +133,9 @@ public class kdhWebController {
             user.setHomePhone(user.getHomePhone() == null || user.getHomePhone().isEmpty() ? existingUser.getHomePhone() : user.getHomePhone());
             user.setZipcode(user.getZipcode() == null || user.getZipcode().isEmpty() ? existingUser.getZipcode() : user.getZipcode());
             user.setAddress(user.getAddress() == null || user.getAddress().isEmpty() ? existingUser.getAddress() : user.getAddress());
-            user.setAddressDetail(user.getAddressDetail() == null || user.getAddressDetail().isEmpty() 
-                    ? existingUser.getAddressDetail() 
-                    : user.getAddressDetail());
+            user.setAddress_detail(user.getAddress_detail() == null || user.getAddress_detail().isEmpty() 
+                    ? existingUser.getAddress_detail() 
+                    : user.getAddress_detail());
             // 비밀번호 변경 확인
             if (user.getPassword() == null || user.getPassword().isEmpty()) {
                 System.out.println("비밀번호 변경 없음, 기존 비밀번호 유지");

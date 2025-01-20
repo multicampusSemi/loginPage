@@ -19,7 +19,7 @@ public class kdhUser {
     private String password;                 // 비밀번호
     private String zipcode;                  // 우편번호
     private String address;                  // 기본 주소
-    private String addressDetail;           // 상세 주소
+    private String address_detail;           // 상세 주소
     private String email;                    // 이메일 주소
     private Boolean emailVerified = false;   // 이메일 인증 여부
     private String role = "USER";            // 사용자 역할

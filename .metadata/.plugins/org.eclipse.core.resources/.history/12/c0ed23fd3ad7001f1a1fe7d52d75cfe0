@@ -18,7 +18,7 @@ br{
     background : rgba(177, 176, 176, 0.205);
 }
 .order-item-main{
-    margin-left: 12%;
+    margin-left: 150px;
     background : rgba(177, 176, 176, 0.205);
     width: 80%;
     box-shadow: 0 4px 8px rgba(0, 4, 0, 0.5);
