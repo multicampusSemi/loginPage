@@ -24,7 +24,7 @@ function generateProductRows(bookingItems) {
     bookingItems.forEach((item, index) => {
         const row = document.createElement('tr');
         row.innerHTML = `
-            <td><input type="checkbox" class="select-check" data-id="${item.bookingId}" onchange="updateShippingFee(bookingItems)"/></td>
+            <td><input type="checkbox" class="select-check" data-id="${item.productId}" onchange="updateShippingFee(bookingItems)"/></td>
             <td><img src="${item.photo}" alt="${item.productName}"/><br/>${item.productName}</td>
             <td>${item.shippingFee}</td>
             <td>
@@ -149,6 +149,8 @@ function order() {
             }
         }
     });
+    
+     console.log('Selected products:', selectedProducts);
     if (selectedProducts.length > 0) {
         $.ajax({
             url: '/order/create',

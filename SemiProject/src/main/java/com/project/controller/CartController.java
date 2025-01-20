@@ -103,8 +103,9 @@ public class CartController {
 		    if (userId == null) {
 		        return "redirect:/login";
 		    }
-		    Integer bookingId = selectedProducts.get(0).getBookingId(); // 예시로 첫 번째 제품의 bookingId 사용
-
+		    
+		    
+		    
 		    orderService.saveOrder(userId, selectedProducts);  // 주문 저장
 
 		    return "redirect:/order";
@@ -137,7 +138,8 @@ public class CartController {
 	     model.addAttribute("totalPrice", totalPrice);
 	     model.addAttribute("totalShippingFee", totalShippingFee);
 	     model.addAttribute("totalAmount", totalAmount);
-
+	     
+	     System.out.println(orderItems);
 
 	     return "order";  // forward로 처리하여 'order.jsp' 파일을 렌더링
 	 }

@@ -12,5 +12,5 @@ public class Orders {
     private int productId;
     private int userId;
     private int bookingId;
-    private int id;
+    private String id;
 }

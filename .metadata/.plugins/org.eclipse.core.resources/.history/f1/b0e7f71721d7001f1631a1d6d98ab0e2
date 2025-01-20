@@ -1,0 +1,58 @@
+package com.project.service;
+
+import java.util.HashMap;
+import java.util.List; 
+import java.util.Map;
+import java.util.UUID;
+import java.util.concurrent.atomic.AtomicReference;
+
+import org.springframework.stereotype.Service;
+
+import com.project.mapper.LjmSemiMapper;
+import com.project.model.OrderItem;
+
+import lombok.RequiredArgsConstructor;
+
+@Service
+@RequiredArgsConstructor
+public class OrderItemService {
+	private final LjmSemiMapper orderMapper;
+	
+	public void saveOrder(int userId, List<OrderItem> selectedProducts) {
+	    String newBookingId = UUID.randomUUID().toString().substring(0, 10);
+	    int totalPrice = 0;
+
+	    for (OrderItem product : selectedProducts) {
+	        int totalAmount = product.getProductPrice() * product.getQuantity();
+	        product.setTotalAmount(totalAmount);
+	        totalPrice += totalAmount;
+	    }
+
+	    Map<String, Object> params = new HashMap<>();
+	    params.put("bookingId", newBookingId);
+	    params.put("userId", userId);
+	    params.put("totalPrice", totalPrice);
+	    params.put("status", "PENDING");
+	    orderMapper.insertOrderTotal(params);
+
+	    selectedProducts.forEach(product -> {
+	        orderMapper.insertOrder(newBookingId, product.getProductId(), product.getQuantity());
+	    });
+	}
+	
+	
+	 public List<OrderItem> getOrders(int userId) {
+		 List<OrderItem> orderItems = orderMapper.getAllOrders(userId);
+		 return orderItems;
+	    }
+
+	    
+	 
+	 public int calculateTotalPrice(List<OrderItem> orders) {
+	        int totalPrice = 0;
+	        for (OrderItem order : orders) {
+	            totalPrice += order.getProductPrice() * order.getQuantity();
+	        }
+	        return totalPrice;
+	    }
+}

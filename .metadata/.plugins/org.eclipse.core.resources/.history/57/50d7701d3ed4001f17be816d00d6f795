@@ -1,8 +1,0 @@
-package com.project.model;
-
-public class Orders {
-    private int productId;
-    private int quantity;
-    private int productPrice;
-    private int totalAmount;
-}

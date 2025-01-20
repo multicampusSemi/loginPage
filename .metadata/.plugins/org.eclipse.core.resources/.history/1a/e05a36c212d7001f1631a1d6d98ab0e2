@@ -1,0 +1,16 @@
+package com.project.model;
+
+import lombok.Data;
+
+@Data
+public class Orders {
+	private String productName;
+    private int quantity;
+    private int productPrice;
+    private int totalAmount;
+    private int shippingFee;
+    private int productId;
+    private int userId;
+    private int bookingId;
+    private int id;
+}
