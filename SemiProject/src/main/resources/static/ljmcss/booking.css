@@ -21,7 +21,7 @@
 .booking-table{
     display: table;
     margin: 0 auto;
-    width: 90%;
+    width: 80%;
     background : rgba(177, 176, 176, 0.205);
     box-shadow: 0 4px 8px rgba(0, 4, 0, 0.5);
 }
@@ -46,19 +46,16 @@ th:nth-child(2) {
     width: 20%;
 }
 
+
 th:nth-child(3) {
-    width: 39%;
-}
-
-th:nth-child(4) {
-    width: 20%; 
-}
-
-th:nth-child(5) {
     width: 10%; 
 }
 
-th:nth-child(6) {
+th:nth-child(4) {
+    width: 10%; 
+}
+
+th:nth-child(5) {
     width: 10%; 
 }
 .allprice{
