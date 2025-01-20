@@ -43,7 +43,6 @@
 
    <!-- 비밀번호 찾기 폼 -->
 <form class="form hidden" id="find-pw-form">
-<div class="input-flied">
   <div class="input-group">
     <label for="id">아이디</label>
     <input type="text" id="username-pw" name="id" placeholder="아이디를 입력하세요" required>
@@ -63,9 +62,8 @@
     <button type="button" id="verify-code-btn" class="action-btn">인증 확인</button>
   </div>
   <button type="button" class="submit-btn" id="reset-password-btn">비밀번호 재설정</button>
-  </div>
 </form>
-	
+
   </div>
 <!-- 모달 -->
   <div id="password-reset-modal" class="modal hidden">
@@ -88,8 +86,7 @@
     </div>
   </div>
   <script src="${pageContext.request.contextPath}/kdh_js/find.js"></script>
-   
-  <div id="footers">
+     <div id="footers">
         <%@ include file="/WEB-INF/views/krhfooter.jsp" %>
         </div>
 </body>
