@@ -3,14 +3,15 @@
 <mapper namespace="com.project.mapper.LjmSemiMapper">
 
 
-	<delete id="deleteProductsFromCart">
+   <delete id="deleteProductsFromCart">
     DELETE FROM bookinglist
     WHERE user_id = #{userId}
-    AND booking_id IN
+    AND product_id IN
     <foreach item="item" collection="productIds" open="(" separator="," close=")">
         #{item}
     </foreach>
-	</delete>
+   </delete>
+
 
 	
 	<select id="getDefaultUserId" resultType="int">
@@ -38,6 +39,7 @@
         SELECT id FROM users
     </select>
 	
+	<!--
 	<insert id="insertOrder" parameterType="map">
     INSERT INTO OrderItem (order_id, product_id, quantity)
     VALUES ( CONCAT(#{bookingId}, 'O'), #{productId}, #{quantity});
@@ -46,6 +48,16 @@
 	<insert id="insertOrderTotal" parameterType="map">
     INSERT INTO Orders (user_id, total_price, created_at, status, id)
     VALUES (#{userId}, #{totalPrice}, NOW(), #{status}, CONCAT(#{bookingId}, 'O'));
+	</insert>
+	-->
+	<insert id="insertOrderTotal" parameterType="map">
+	    INSERT INTO Orders (user_id, total_price, created_at, status)
+	    VALUES (#{userId}, #{totalPrice}, NOW(), #{status});
+	</insert>
+	
+	<insert id="insertOrder" parameterType="map">
+	    INSERT INTO OrderItem (order_id, product_id, quantity)
+	    VALUES (LAST_INSERT_ID(), #{productId}, #{quantity});
 	</insert>
 
 	<select id="showbookingitem" resultMap="bookingListResultMap">

@@ -194,7 +194,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
             if (!isValid) {
                 e.preventDefault();
+                return;
             }
+            // 모든 유효성 검사 통과 후 alert 추가
+        alert("회원정보가 성공적으로 수정되었습니다!");
         });
     }
 

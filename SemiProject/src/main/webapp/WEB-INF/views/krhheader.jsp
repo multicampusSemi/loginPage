@@ -23,7 +23,6 @@
                         <ul class="navtag1">
                         <c:if test="${empty sessionScope.loggedInUser}">
                             <li><a href="/web/main">login</a></li>
-                            <li><a href="#">join</a></li>
                         </c:if>
                          <c:if test="${not empty sessionScope.loggedInUser}">
                             <li><a href="/web/logout">logout</a></li>

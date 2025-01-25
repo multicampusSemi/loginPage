@@ -58,3 +58,4 @@ public class EmailController {
         return ResponseEntity.ok(Map.of("verified", isVerified));
     }
 }
+

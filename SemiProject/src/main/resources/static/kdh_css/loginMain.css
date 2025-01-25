@@ -476,7 +476,7 @@ label.required::before {
   font-family: "Hahmlet", serif;
 }
 #send-code-btn{
-	display:none;
+   display:none;
 }
 .cancel-btn {
   background: linear-gradient(120deg, #aaaaaa, #aaaaaa);
@@ -526,7 +526,7 @@ label.required::before {
   margin: 0;
 }
 #phone-error{
-	 color: red;
+    color: red;
   font-size: 12px;
   position: absolute;
   top: 100%;
@@ -539,7 +539,7 @@ label.required::before {
   font-weight: bold;
 }
 .email-error,.username-error{
-	 color: red;
+    color: red;
   font-size: 12px;
   margin-top: 5px; /* 체크박스와 에러 메시지 간격 */
   font-weight: bold;
@@ -552,7 +552,7 @@ label.required::before {
   margin-left: 30px;
 }
 .email-error{
-	left: 0px;
+   left: 0px;
 }
 .check-error-message {
   color: red;

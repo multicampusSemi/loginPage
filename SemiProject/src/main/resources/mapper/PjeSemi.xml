@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.project.mapper.PjeSemiMapper">
+
+    <!-- 사용자별 모든 주문 조회 -->
+    <select id="findAll" parameterType="int" resultType="com.project.model.PjeOrder">
+        SELECT 
+            o.id AS id,
+            o.user_id AS userId,
+            o.total_price AS totalPrice,
+            o.status AS status,
+            o.created_at AS createdAt,
+            o.updated_at AS updatedAt,
+            oi.quantity AS quantity, 
+            p.productName AS productName,
+            p.productPrice AS price
+        FROM 
+            Orders o
+        LEFT JOIN 
+            OrderItem oi ON o.id = oi.order_id
+        LEFT JOIN 
+            Products p ON oi.product_id = p.productId
+        WHERE 
+            o.user_id = #{userId} <!-- 사용자 ID 조건 -->
+    </select>
+
+    <!-- 사용자별 최근 주문 조회 -->
+    <select id="getRecentOrders" parameterType="int" resultType="com.project.model.PjeRecent">
+        SELECT 
+            p.photo AS photo, 
+            p.productName AS productName,
+            p.productPrice AS price, 
+            oi.quantity AS quantity, 
+            o.created_at AS orderDate
+        FROM 
+            Orders o
+        JOIN 
+            OrderItem oi ON o.id = oi.order_id
+        JOIN 
+            Products p ON oi.product_id = p.productId
+        WHERE 
+            o.user_id = #{userId} <!-- 사용자 ID 조건 -->
+            AND o.status = 'COMPLETED'
+        ORDER BY 
+            o.created_at DESC
+        LIMIT 3;
+    </select>
+
+    <!-- 특정 주문 상세 정보 조회 -->
+    <select id="getOrderDetails" parameterType="int" resultType="com.project.model.PjeOrderDetails">
+        SELECT 
+            o.id AS orderId,
+            u.name AS userName,
+            u.email AS userEmail,
+            p.productName AS productName,
+            p.photo AS photo,
+            p.productPrice AS productPrice,
+            oi.quantity AS quantity,
+            (p.productPrice * oi.quantity) AS totalPrice
+        FROM 
+            Orders o
+        JOIN 
+            users u ON o.user_id = u.id
+        JOIN 
+            OrderItem oi ON o.id = oi.order_id
+        JOIN 
+            products p ON oi.product_id = p.productId
+        WHERE 
+            o.id = #{orderId}
+    </select>
+
+    <!-- 상태 필터링을 포함한 주문 조회 -->
+    <select id="findAllWithStatus" parameterType="map" resultType="com.project.model.PjeOrder">
+        SELECT 
+            o.id AS id,
+            o.user_id AS userId,
+            o.total_price AS totalPrice,
+            o.status AS status,
+            o.created_at AS createdAt,
+            o.updated_at AS updatedAt,
+            oi.quantity AS quantity, 
+            p.productName AS productName,
+            p.productPrice AS price
+        FROM 
+            Orders o
+        LEFT JOIN 
+            OrderItem oi ON o.id = oi.order_id
+        LEFT JOIN 
+            Products p ON oi.product_id = p.productId
+        WHERE 
+            o.user_id = #{userId}
+            <if test="status != null">
+                AND o.status = #{status}
+            </if>
+    </select>
+
+    <!-- 상품 이름으로 검색 -->
+    <select id="searchOrdersByProductName" parameterType="map" resultType="com.project.model.PjeOrder">
+        SELECT 
+            o.id AS id,
+            o.user_id AS userId,
+            o.total_price AS totalPrice,
+            o.status AS status,
+            o.created_at AS createdAt,
+            o.updated_at AS updatedAt,
+            oi.quantity AS quantity, 
+            p.productName AS productName,
+            p.productPrice AS price
+        FROM 
+            Orders o
+        LEFT JOIN 
+            OrderItem oi ON o.id = oi.order_id
+        LEFT JOIN 
+            Products p ON oi.product_id = p.productId
+        WHERE 
+            o.user_id = #{userId}
+            AND p.productName LIKE CONCAT('%', #{productName}, '%')
+    </select>
+
+    <!-- 페이지네이션을 포함한 주문 조회 -->
+    <select id="findOrdersWithPagination" parameterType="map" resultType="com.project.model.PjeOrder">
+        SELECT 
+            o.id AS id,
+            o.user_id AS userId,
+            o.total_price AS totalPrice,
+            o.status AS status,
+            o.created_at AS createdAt,
+            o.updated_at AS updatedAt,
+            oi.quantity AS quantity, 
+            p.productName AS productName,
+            p.productPrice AS price
+        FROM 
+            Orders o
+        LEFT JOIN 
+            OrderItem oi ON o.id = oi.order_id
+        LEFT JOIN 
+            Products p ON oi.product_id = p.productId
+        WHERE 
+            o.user_id = #{userId}
+        ORDER BY 
+            o.created_at DESC
+        LIMIT #{offset}, #{limit}
+    </select>
+
+    <!-- 총 주문 금액 계산 -->
+    <select id="calculateTotalOrderAmount" parameterType="int" resultType="int">
+        SELECT 
+            SUM(o.total_price)
+        FROM 
+            Orders o
+        WHERE 
+            o.user_id = #{userId}
+    </select>
+
+</mapper>

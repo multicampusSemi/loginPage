@@ -1,6 +1,6 @@
 /* 공통 스타일 */
 body {
-    font-family: "Hahmlet", serif;
+	/*
     background-color: #f9f9f9;
     margin: 0;
     padding: 0;
@@ -9,20 +9,22 @@ body {
     align-items: center;
     color: rgb(60, 60, 60); /* 기본 텍스트 색상 */
 }
-
+.orders{
+    font-family:"Hahmlet", serif;
+    display: flex;
+    height: 100%;
+    overflow: hidden;
+    max-width: 100%;
+    margin-top: 100px;
+    margin-bottom: 100px;
+}
 /* 사이드바 스타일 */
 .sidebar {
-    width: 200px;
-    height: 100vh;
-    background-color: #333;
-    color: white;
-    position: fixed;
-    top: 0;
-    left: 0;
-    display: flex;
-    flex-direction: column;
+	margin-top: 45px;
+	margin-bottom: 45px;
+    width: 250px;
     padding-top: 20px;
-    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+    font-family:"Hahmlet", serif;
 }
 
 .sidebar ul {
@@ -32,19 +34,22 @@ body {
 }
 
 .sidebar ul li {
-    margin: 10px 0;
+    margin: 20px 0;
 }
 
 .sidebar ul li a {
-    color: white;
+    color:black;
     text-decoration: none;
+    font-size: 18px;
     display: block;
-    padding: 10px 15px;
-    transition: background 0.3s ease;
+    padding: 10px 20px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+        text-align:center;
 }
 
 .sidebar ul li a:hover {
-    background-color: #575757;
+    background-color: rgba(128, 128, 128, 0.274);
 }
 
 .sidebar ul li a.active {
@@ -60,10 +65,11 @@ body {
     max-width: 800px;
     text-align: center;
     margin: 0 auto;
+	min-height:500px;
 }
 
-h1 {
-    font-size: 30px;
+h2 {
+    font-size: 40px;
     color: rgb(60, 60, 95);
     margin: 50px 0;
     text-align: center;

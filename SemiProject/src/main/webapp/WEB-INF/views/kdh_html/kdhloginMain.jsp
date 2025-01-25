@@ -6,11 +6,11 @@
 <html>
 <head>
     <title>로그인 메인</title>
-	<link rel="preconnect" href="https://fonts.googleapis.com">
+   <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Hahmlet:wght@100..900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/kdh_css/loginMain.css">
-	<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+   <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 </head>
 <body id="body">
    <%@ include file="/WEB-INF/views/krhheader.jsp" %>
@@ -58,7 +58,7 @@
         </div>
     </form>
 </div>
- <div id="footers"
+ <div id="footers">
 <%@ include file="/WEB-INF/views/krhfooter.jsp" %> 
 </div>
 <div id="modal" class="hidden">
@@ -99,8 +99,8 @@
       <input type="text" class="phone-prefix" id="phone1" name="phone1" value="010" readonly>
       <input type="number" id="phone2" name="phone2" placeholder="1234" required>
       <input type="number" id="phone3" name="phone3" placeholder="5678" required>
-     <div id="phone-error" class="error-message"></div>
-      <div class="error-message" style="white-space: nowrap; margin-top: 5px;">* 필수 입력 사항입니다.</div>
+     <div id="phone-error" class="phone-error"></div>
+      <div id="phoneConfirm" class="error-message" style="white-space: nowrap; margin-top: 5px;">* 필수 입력 사항입니다.</div>
       <div></div>
   </div>
 </div>
@@ -119,8 +119,8 @@
               <label for="username" class="required">아이디</label>
               <input type="text" id="username" name="username" placeholder="영문 소문자/숫자, 4-16자" required>
               <div class="error-message">* 필수 입력 사항입니다.</div>
-          	   <div id="username-error" class="error-message username-format-error">아이디 형식에 맞지 않습니다.</div>
-          	   <div id="" class="username-error">중복된 아이디 입니다.</div>
+                <div id="username-error" class="error-message username-format-error">아이디 형식에 맞지 않습니다.</div>
+                <div id="" class="username-error">중복된 아이디 입니다.</div>
           </div>
           <br>
           <!-- 비밀번호 -->
@@ -243,7 +243,11 @@
 </form>
 </div>
   
-  
+  <c:if test="${not empty error}">
+    <div id="errorMessage" data-field="${errorField}" style="display: none;">
+        ${error}
+    </div>
+</c:if>
  
 </body>
     <script src="${pageContext.request.contextPath}/kdh_js/loginMain.js" defer></script>

@@ -23,7 +23,18 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class krhProductController {
 	private final krhProductService krhProductService;
-
+	//주문내역
+	//주문내역
+	@GetMapping("/recentorders")
+    public String recent() {
+        return "recentorders"; // 이 파일은 /WEB-INF/views/krhagreement.jsp에 위치해야 합니다.
+    }
+	
+	@GetMapping("/orderhistory")
+    public String history() {
+        return "orderhistory"; // 이 파일은 /WEB-INF/views/krhagreement.jsp에 위치해야 합니다.
+    }
+	
 	@GetMapping("/findAll")
 	public String findAll(Model model) {
 		List<KrhProduct> products = krhProductService.findAll();

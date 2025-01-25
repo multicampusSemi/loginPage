@@ -1,6 +1,7 @@
 package com.project.controller;
 
-import org.springframework.beans.factory.annotation.Autowired; 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DuplicateKeyException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -47,9 +48,9 @@ public class kdhWebController {
     @PostMapping("/register")
     public String registerUser(@ModelAttribute kdhUser user, RedirectAttributes redirectAttributes) {
         try {
-            System.out.println("회원가입 요청 수신: " + user.toString());  // 디버깅
             boolean isVerified = userService.isEmailVerified(user.getEmail());
             if (!isVerified) {
+                redirectAttributes.addFlashAttribute("errorField", "email");
                 redirectAttributes.addFlashAttribute("error", "이메일 인증을 완료해주세요.");
                 return "redirect:/web/loginMain";
             }
@@ -57,12 +58,31 @@ public class kdhWebController {
             userService.createUser(user);
             redirectAttributes.addFlashAttribute("message", "회원가입이 완료되었습니다.");
             return "redirect:/web/loginMain?signupUsername=" + user.getUsername();
+
+        } catch (DuplicateKeyException e) {
+            String errorMessage = e.getMessage().toLowerCase();
+            System.out.println("데이터베이스 오류 메시지: " + errorMessage);
+
+            if (errorMessage.contains("key 'phone'")) {
+            	redirectAttributes.addFlashAttribute("errorField", "phone"); // phone2로 수정
+                redirectAttributes.addFlashAttribute("error", "이미 사용 중인 전화번호입니다.");
+            } else if (errorMessage.contains("key 'username'")) {
+            	redirectAttributes.addFlashAttribute("errorField", "username");
+            	redirectAttributes.addFlashAttribute("error", "이미 사용 중인 아이디입니다.");
+            } else {
+                redirectAttributes.addFlashAttribute("errorField", "unknown");
+                redirectAttributes.addFlashAttribute("error", "알 수 없는 오류가 발생했습니다.");
+            }
+
+            return "redirect:/web/loginMain";
         } catch (Exception e) {
-            e.printStackTrace();  // 서버 로그 출력
+            e.printStackTrace();
+            redirectAttributes.addFlashAttribute("errorField", "unknown");
             redirectAttributes.addFlashAttribute("error", "회원가입 처리 중 오류가 발생했습니다.");
             return "redirect:/web/loginMain";
         }
     }
+
 
 
 
@@ -111,6 +131,7 @@ public class kdhWebController {
             System.out.println("전화번호: " + existingUser.getPhone());
             System.out.println("우편번호: " + existingUser.getZipcode());
             System.out.println("주소: " + existingUser.getAddress());
+            System.out.println("상세주소: " + existingUser.getAddressDetail());
 
             // 수정된 사용자 정보 확인
             System.out.println("=== 입력된 사용자 정보 ===");
@@ -121,6 +142,7 @@ public class kdhWebController {
             System.out.println("전화번호: " + user.getPhone());
             System.out.println("우편번호: " + user.getZipcode());
             System.out.println("주소: " + user.getAddress());
+            System.out.println("상세주소: " + existingUser.getAddressDetail());
 
             // 변경하지 않은 값은 기존 사용자 데이터 유지
             user.setName(existingUser.getName());

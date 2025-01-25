@@ -18,9 +18,9 @@
         <!-- 왼쪽 사이드바 -->
 <nav class="sidebar">
     <ul>
-        <li><a href="#">최근 주문 상품</a></li>
-        <li><a href="#">주문 내역</a></li>
-        <li><a href="#p">회원 정보 수정</a></li>
+        <li><a href="/recent-orders" class="active">최근 주문 상품</a></li>
+            <li><a href="/orderHistory">주문 내역</a></li>
+            <li><a href="/web/kdhedit">회원 정보 수정</a></li>
     </ul>
 </nav>
 <!-- 메인 컨텐츠 -->
@@ -28,7 +28,7 @@
     <div class="agreement">
         <div class="am">
             <header>
-                <h1>Update Profile</h1>
+                <h2>회원 정보 수정</h2>
             </header>
             <main>
                 <form action="/web/kdhedit" method="post" id="updateForm">
@@ -117,7 +117,7 @@
             </div>
         </main>
     </div>
-    <div id="footers"
+    <div id="footers">
 <%@ include file="/WEB-INF/views/krhfooter.jsp" %> 
 </div>
 </body>
